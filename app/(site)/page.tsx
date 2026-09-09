@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main id="main-content" tabIndex={-1} className="site-container site-section">
       <p>AI/ML Portfolio - Project Foundation</p>
     </main>
   );

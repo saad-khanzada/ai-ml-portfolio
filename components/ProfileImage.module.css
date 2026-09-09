@@ -1,0 +1,8 @@
+.portrait {
+  display: block;
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
+  border: 1px solid var(--site-border, #d8dcd5);
+  border-radius: 0.75rem;
+}

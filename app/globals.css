@@ -11,3 +11,438 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Portfolio design foundations */
+.site-shell {
+  --site-background: #f7f5ef;
+  --site-surface: #ffffff;
+  --site-surface-muted: #eeece5;
+  --site-text: #202b30;
+  --site-text-muted: #576369;
+  --site-accent: #24665e;
+  --site-accent-hover: #194c46;
+  --site-gold: #946b2d;
+  --site-border: #d8dcd5;
+  --site-focus: #24665e;
+
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--site-background);
+  color: var(--site-text);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+  color-scheme: light;
+}
+
+.site-shell *,
+.site-shell *::before,
+.site-shell *::after {
+  box-sizing: border-box;
+}
+
+.site-shell ::selection {
+  background: #d5e7df;
+  color: var(--site-text);
+}
+
+.site-shell :focus-visible {
+  outline: 3px solid var(--site-focus);
+  outline-offset: 4px;
+}
+
+.site-container {
+  width: min(100% - 2.5rem, 75rem);
+  margin-inline: auto;
+}
+
+.site-section {
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.site-heading {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.site-heading-lg {
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+}
+
+.site-heading-md {
+  font-size: clamp(1.875rem, 4vw, 3rem);
+}
+
+.site-copy {
+  max-width: 65ch;
+  color: var(--site-text-muted);
+}
+
+.site-label {
+  color: var(--site-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-shell code,
+.site-shell pre {
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.site-shell pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (min-width: 48rem) {
+  .site-container {
+    width: min(100% - 4rem, 75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-shell *,
+  .site-shell *::before,
+  .site-shell *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Portfolio UI primitives */
+.site-shell .site-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.site-shell .site-button-primary {
+  background: var(--site-accent);
+  color: #ffffff;
+}
+
+.site-shell .site-button-secondary {
+  background: transparent;
+  color: var(--site-accent);
+  border-color: var(--site-accent);
+}
+
+@media (hover: hover) {
+  .site-shell .site-button-primary:hover:not(:disabled) {
+    background: var(--site-accent-hover);
+  }
+
+  .site-shell .site-button-secondary:hover:not(:disabled) {
+    background: #e5eee8;
+  }
+}
+
+.site-shell .site-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.site-section-heading {
+  display: grid;
+  gap: 1rem;
+  max-width: 48rem;
+}
+
+.site-section-heading > p {
+  margin: 0;
+}
+
+/* Portfolio content surfaces */
+.site-shell .site-card {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--site-surface);
+  border: 1px solid var(--site-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgb(32 43 48 / 3%);
+}
+
+.site-shell .site-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--site-border);
+  border-radius: 0.375rem;
+  background: var(--site-surface-muted);
+  color: var(--site-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.site-shell .site-empty-state {
+  padding-block: 2rem;
+}
+
+.site-shell .site-empty-state > h2,
+.site-shell .site-empty-state > h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.site-shell .site-empty-state > p {
+  margin: 0.75rem 0 0;
+}
+
+/* Portfolio navigation */
+.site-shell .site-header {
+  position: relative;
+  z-index: 20;
+  border-bottom: 1px solid var(--site-border);
+  background: var(--site-background);
+}
+
+.site-shell .site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 5.5rem;
+  padding-block: 1rem;
+}
+
+.site-shell .site-brand {
+  min-width: 0;
+  max-width: 20rem;
+  color: var(--site-text);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+  text-decoration: none;
+}
+
+.site-shell .site-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.site-shell .site-header-actions > .site-button {
+  padding-inline: 0.875rem;
+}
+
+.site-shell .site-desktop-nav {
+  display: none;
+}
+
+.site-shell .site-header nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-shell .site-header nav a,
+.site-shell .site-nav-unavailable {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.site-shell .site-header nav a {
+  color: var(--site-text);
+}
+
+.site-shell .site-nav-unavailable {
+  color: var(--site-text-muted);
+  cursor: default;
+}
+
+.site-shell .site-mobile-menu > summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--site-border);
+  border-radius: 0.5rem;
+  color: var(--site-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.site-shell .site-mobile-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-shell .site-mobile-menu[open] > summary {
+  background: var(--site-surface-muted);
+}
+
+.site-shell .site-mobile-menu nav {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--site-border);
+  background: var(--site-background);
+  box-shadow: 0 8px 16px rgb(32 43 48 / 5%);
+  max-height: 70svh;
+  overflow-y: auto;
+}
+
+.site-shell .site-mobile-menu nav a,
+.site-shell .site-mobile-menu .site-nav-unavailable {
+  display: flex;
+  width: 100%;
+}
+
+@media (hover: hover) {
+  .site-shell .site-header nav a:hover {
+    color: var(--site-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+}
+
+@media (min-width: 75rem) {
+  .site-shell .site-desktop-nav {
+    display: block;
+  }
+
+  .site-shell .site-desktop-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+  }
+
+  .site-shell .site-mobile-menu {
+    display: none;
+  }
+}
+
+@media (max-width: 23rem) {
+  .site-shell .site-header-inner {
+    flex-wrap: wrap;
+  }
+
+  .site-shell .site-header-actions {
+    margin-inline-start: auto;
+  }
+}
+
+/* Portfolio footer */
+.site-shell .site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--site-border);
+}
+
+.site-shell .site-footer-inner {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: 2.5rem;
+}
+
+.site-shell .site-footer-identity {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.site-shell .site-footer p {
+  margin: 0;
+}
+
+.site-shell .site-footer-name {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.site-shell .site-footer .site-copy,
+.site-shell .site-copyright {
+  font-size: 0.875rem;
+  color: var(--site-text-muted);
+}
+
+.site-shell .site-footer nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-shell .site-footer nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--site-text);
+  font-size: 0.875rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+@media (hover: hover) {
+  .site-shell .site-footer nav a:hover {
+    color: var(--site-accent);
+  }
+}
+
+@media (min-width: 48rem) {
+  .site-shell .site-footer-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .site-shell .site-copyright {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Portfolio shell integration */
+.site-shell .site-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.site-shell .site-skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 1.25rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  background: var(--site-accent);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.site-shell .site-skip-link:focus {
+  transform: translateY(0);
+}

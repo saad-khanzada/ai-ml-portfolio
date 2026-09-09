@@ -55,12 +55,13 @@ the same port. Restart/rebuild after changing environment configuration.
 
 ## Architecture
 
-- app/: minimal website foundation and embedded Studio route
+- app/(site)/: public website shell and pages
+- app/studio/: embedded Sanity Studio
 - sanity/schemaTypes/: modular documents and shared content types
 - sanity/structure.ts: Studio navigation and profile singleton entry
 - sanity/constants.ts: authoritative profile document ID
 - sanity/env.ts: public CMS configuration
-- sanity/lib/: initializer-generated helpers; data-access design is Phase 3
+- sanity/lib/: centralized typed CMS queries, fetching and image helpers
 - sanity.config.ts: Studio schemas, plugins, templates and actions
 - sanity.cli.ts: Sanity CLI project configuration
 
@@ -188,27 +189,66 @@ responsible for alt text, responsive sizes and Next.js image rendering.
 The initializer-generated live.ts is not wired into the website.
 The current data layer uses fetch.ts and does not enable live preview.
 
+## Website design system
+
+The public website uses app/(site)/layout.tsx. Embedded Studio remains
+outside this route group and does not receive the portfolio header/footer.
+
+The site shell uses the Premium Editorial AI light palette, responsive
+spacing, visible keyboard focus and reduced-motion rules.
+
+Reusable components:
+- Navbar and Footer with conditional CMS-driven identity and links.
+- Button, ButtonLink, SectionHeading, Card, SkillBadge and EmptyState.
+- ProfileImage with responsive sizing and CMS crop/hotspot support.
+
+Navigation availability is centralized in lib/navigation.ts. Routes that
+have not been implemented are currently non-interactive labels. Enable
+each route when its page is ready; this is temporary development behavior.
+
+ProfileImage returns nothing when its image URL or alternative text is
+unavailable. CMS alternative text takes precedence, with the profile name
+as a fallback. It uses a 4:5 portrait crop and defaults to lazy loading.
+Callers supply sizes to match their layout.
+
+Next.js remote image optimization is restricted to HTTPS cdn.sanity.io
+images in the configured project/dataset. Variable query parameters are
+allowed for Sanity image sizing and crop transformations.
+
 ## Current phase
 
 Phase 2 completed and pushed:
 c8d972a99907826718c2ba0a6b6a0da9a83e90ea - sanity-schema-setup
 
-Phase 3 - CMS Data Access Layer: implementation and production build passed;
-source and documentation review passed; Git checkpoint pending.
+Phase 3 completed and pushed:
+6c370a3d7ee6567314646d38c50049a88c0a25ef - cms-data-access-layer
 
-Verified: nine-query TypeGen generation, lint, TypeScript, production build,
-image URL behavior, live reads against the empty public dataset, missing
+Phase 3 checks passed: TypeGen, lint, TypeScript, production build,
+image URL behavior, reads against the empty public dataset, missing
 records, invalid slugs and simulated CMS failure handling.
+The failure test checked revalidation options, not actual cache timing.
 
-The isolated failure test checked revalidation options, not actual cache
-timing. Non-empty content rendering, Next.js cache behavior and image delivery
-will be verified when the data layer is connected to pages.
+Phase 4 - Design System and Site Shell: implementation and source review
+finished; final production build passed. Git checkpoint pending.
 
-No Phase 3 completion is claimed until the reviewed state is committed,
-pushed and the working tree is clean.
+Confirmed Phase 4 checks:
+- Desktop shell loads without obvious horizontal overflow.
+- Narrow-screen menu opens/closes; Escape closes it and restores focus.
+- Skip link moves keyboard focus to main content.
+- Studio loads independently of the portfolio shell.
+- Lint and TypeScript pass after ProfileImage and image configuration.
 
-Next: Phase 4, the locked Premium Editorial AI design system and site shell.
-Existing dependency security findings remain documented above.
+The final production build passed after the image changes.
+ProfileImage is not yet mounted;
+real-image delivery and populated CMS layouts remain unverified.
+Visual checks of unused UI primitives will occur as pages integrate them.
+
+The homepage still contains foundation text. Full homepage implementation
+is Phase 5. No final content or production deployment is claimed.
+
+Phase 4 is complete only after the intended stable state is validated,
+committed, pushed and the working tree is clean.
+Existing dependency findings remain documented above.
 
 ## Recovery and maintenance
 
