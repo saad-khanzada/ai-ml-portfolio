@@ -1,0 +1,61 @@
+.hero {
+  display: grid;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.content {
+  min-width: 0;
+  max-width: 46rem;
+}
+
+.headline {
+  margin: 1.25rem 0 0;
+  color: var(--site-accent);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.introduction {
+  margin: 1.25rem 0 0;
+  font-size: 1.0625rem;
+  white-space: pre-line;
+}
+
+.location {
+  margin: 1rem 0 0;
+  color: var(--site-text-muted);
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.portrait {
+  width: 100%;
+  max-width: 14rem;
+  min-width: 0;
+}
+
+@media (min-width: 48rem) {
+  .portrait {
+    max-width: 16rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .withPortrait {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+  }
+
+  .portrait {
+    max-width: 20rem;
+    justify-self: end;
+  }
+}

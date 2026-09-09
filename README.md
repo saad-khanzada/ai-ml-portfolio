@@ -215,6 +215,50 @@ Next.js remote image optimization is restricted to HTTPS cdn.sanity.io
 images in the configured project/dataset. Variable query parameters are
 allowed for Sanity image sizing and crop transformations.
 
+## Homepage implementation
+
+The homepage is a Server Component using the existing typed CMS helpers.
+Profile, projects, skills, experience and blog requests start in parallel.
+A CMS fetch failure displays a generic availability message rather than
+being presented as an empty collection. The current page uses an all-or-
+nothing content fallback if any of these requests fails.
+
+Section order:
+1. Hero
+2. Featured projects
+3. Skills
+4. Experience snapshot
+5. Recent writing
+6. Contact CTA
+
+Hero content comes from the published profile. Missing profile content
+uses the neutral AI/ML Portfolio heading. Optional introduction, location,
+portrait and resume link disappear when unavailable. The Projects button
+appears only when the featured-projects section has qualifying content.
+
+The hero retains Sanity crop/hotspot positioning and a 4:5 portrait ratio.
+Portrait width is capped at 14rem on mobile, 16rem on tablet and 20rem on
+desktop, with matching responsive image sizes. Hero imagery is preloaded.
+Alternative text uses CMS text with the profile name as fallback.
+
+Featured projects shows up to three featured records with nonblank titles.
+Skills shows featured skills grouped by their CMS category.
+Experience shows up to three records with role and organization.
+Recent writing shows up to three records with a title and valid slug.
+These sections preserve the ordering supplied by the centralized queries.
+
+ProjectCard is reusable. Project and blog detail links remain disabled
+until their corresponding routes are implemented in Phases 7 and 8.
+Cover images require an image URL and alternative text.
+Missing categories, references and optional content render conditionally.
+
+Contact displays only when a usable email or web LinkedIn URL exists.
+CMS contact heading/text are supported; the heading falls back to
+Get in touch. No contact form or custom backend has been introduced.
+
+lib/contentDate.ts formats dates consistently in UTC and omits values
+that JavaScript cannot parse as dates. It is not a strict calendar validator.
+
 ## Current phase
 
 Phase 2 completed and pushed:
@@ -223,32 +267,43 @@ c8d972a99907826718c2ba0a6b6a0da9a83e90ea - sanity-schema-setup
 Phase 3 completed and pushed:
 6c370a3d7ee6567314646d38c50049a88c0a25ef - cms-data-access-layer
 
-Phase 3 checks passed: TypeGen, lint, TypeScript, production build,
-image URL behavior, reads against the empty public dataset, missing
-records, invalid slugs and simulated CMS failure handling.
-The failure test checked revalidation options, not actual cache timing.
+Phase 4 completed and pushed:
+81fad18e84088eb7606b7bb3b97f51bb3f65a59b - portfolio-design-system-and-shell
 
-Phase 4 - Design System and Site Shell: implementation and source review
-finished; final production build passed. Git checkpoint pending.
+Phase 5 - Homepage: implementation, source review and production build
+passed. Documentation update and Git checkpoint are being finalized.
 
-Confirmed Phase 4 checks:
-- Desktop shell loads without obvious horizontal overflow.
-- Narrow-screen menu opens/closes; Escape closes it and restores focus.
-- Skip link moves keyboard focus to main content.
-- Studio loads independently of the portfolio shell.
-- Lint and TypeScript pass after ProfileImage and image configuration.
+Validation completed:
+- Lint, TypeScript and production build after the portrait-sizing change.
+- Desktop and narrow-width empty-content checks.
+- Published profile updates reaching the running homepage.
+- Portrait delivery, crop/hotspot framing and approved responsive sizing.
+- Populated projects, skills, experience, writing and contact sections.
+- Correct section order and working hero anchor to featured projects.
+- Missing optional images/links do not leave empty sections or image areas.
+- No horizontal scrolling observed in the tested desktop/narrow layouts.
 
-The final production build passed after the image changes.
-ProfileImage is not yet mounted;
-real-image delivery and populated CMS layouts remain unverified.
-Visual checks of unused UI primitives will occur as pages integrate them.
+Temporary test project, post, experience, skill and category were deleted.
+Profile test content was cleaned and republished; the user's name, portrait,
+crop/hotspot and alternative text were retained.
+CMS content changes are separate from Git commits.
 
-The homepage still contains foundation text. Full homepage implementation
-is Phase 5. No final content or production deployment is claimed.
+Validation limits:
+- Project/blog cover-image delivery has not been directly tested.
+- Resume delivery and the populated LinkedIn CTA were not directly tested.
+- Multi-record grid stress cases and comprehensive accessibility checks
+  remain for later validation.
+- The earlier isolated CMS failure test checked fetch behavior; the
+  homepage outage presentation was source-reviewed, not browser-injected.
+- Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
-Phase 4 is complete only after the intended stable state is validated,
-committed, pushed and the working tree is clean.
+Only Home is currently enabled in the main navigation.
+Next: Phase 6, project listing and CMS-managed category filtering.
+Final content, SEO/security review, deployment and domain work remain later.
 Existing dependency findings remain documented above.
+
+Phase 5 is complete only when the reviewed state is committed, pushed
+and the working tree is clean.
 
 ## Recovery and maintenance
 
