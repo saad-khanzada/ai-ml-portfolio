@@ -144,22 +144,71 @@ attacker-writable directories. Reassess both advisories, dependency updates
 and actual exposure before launch. Do not use npm audit fix --force to
 downgrade Sanity below next-sanity's compatibility requirements.
 
+## CMS data access
+
+- sanity/lib/queries.ts: nine centralized GROQ queries.
+- sanity/lib/content.ts: typed server-only content helpers.
+- sanity/lib/fetch.ts: published-content fetching and CMS error handling.
+- sanity/lib/image.ts: image URL builder and nullable image helper.
+- sanity/schema.json: generated schema snapshot, not CMS content.
+- types/sanity.generated.ts: generated schema and query-result types.
+- sanity.cli.ts: TypeGen configuration.
+
+After changing schemas, refresh the snapshot:
+
+    npx --no-install sanity schemas extract --path sanity/schema.json --force
+
+After changing queries or refreshing the snapshot, regenerate types:
+
+    npx --no-install sanity typegen generate
+
+Commit generated files alongside the source changes that produced them.
+Do not edit generated files manually. One ESLint rule is disabled only for
+the generated type file because TypeGen emits an empty extension interface.
+
+Use content.ts from Server Components. Reads use the published perspective,
+no private token, the Sanity API directly, and Next.js revalidation set to
+60 seconds. React cache shares repeated helper calls within a server render.
+Revalidation is request-driven; this is not a scheduled publishing service.
+
+The profile helper selects the fixed site-profile ID. List queries return
+empty arrays when no documents exist. Missing detail/profile queries return
+null. Invalid slugs return null without making a CMS request.
+CMS request failures throw CmsFetchError with a generic message.
+Future pages must handle that error separately from genuinely missing content.
+
+References and optional fields may be null. Future rendering must hide
+missing links, sections and unresolved references cleanly.
+
+getImageUrl returns null for missing or malformed image references and invalid
+dimensions. Width-only requests preserve aspect ratio with fit=max.
+Width plus height supports CMS crop/hotspot positioning. Components remain
+responsible for alt text, responsive sizes and Next.js image rendering.
+
+The initializer-generated live.ts is not wired into the website.
+The current data layer uses fetch.ts and does not enable live preview.
+
 ## Current phase
 
-Phase 2 - Sanity CMS Foundation: implementation and source review finished.
-Reproducible installation, lint, schema validation, TypeScript, production
-build and browser checks passed. Screenshot-gallery validation explicitly
-requires alternative text. Remaining dependency findings are documented above.
+Phase 2 completed and pushed:
+c8d972a99907826718c2ba0a6b6a0da9a83e90ea - sanity-schema-setup
 
-Phase 1 stable baseline:
-202f70343c77763ea0229c93936684103808120a
+Phase 3 - CMS Data Access Layer: implementation and production build passed;
+source and documentation review passed; Git checkpoint pending.
 
-No Phase 2 completion is claimed until final checks pass and the intended
-state is committed, pushed and the working tree is clean.
+Verified: nine-query TypeGen generation, lint, TypeScript, production build,
+image URL behavior, live reads against the empty public dataset, missing
+records, invalid slugs and simulated CMS failure handling.
 
-Next: Phase 3, centralized typed CMS data access. Final portfolio pages,
-design system, animations, real content, deployment and domain integration
-remain assigned to later phases.
+The isolated failure test checked revalidation options, not actual cache
+timing. Non-empty content rendering, Next.js cache behavior and image delivery
+will be verified when the data layer is connected to pages.
+
+No Phase 3 completion is claimed until the reviewed state is committed,
+pushed and the working tree is clean.
+
+Next: Phase 4, the locked Premium Editorial AI design system and site shell.
+Existing dependency security findings remain documented above.
 
 ## Recovery and maintenance
 
