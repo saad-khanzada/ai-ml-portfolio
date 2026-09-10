@@ -259,6 +259,44 @@ Get in touch. No contact form or custom backend has been introduced.
 lib/contentDate.ts formats dates consistently in UTC and omits values
 that JavaScript cannot parse as dates. It is not a strict calendar validator.
 
+## Projects listing
+
+/projects is a Server Component that awaits URL search parameters.
+It reuses getProjects, getProjectCategories, ProjectCard and EmptyState.
+No new dependency or client-side filtering component was added.
+
+Category filters come from published Sanity categories with usable titles
+and slugs. URLs use /projects?category=<slug>; matching projects are selected
+by the category document ID. Filtering occurs on the server over the
+existing project-list query result, preserving its sort order.
+
+All projects includes records with nonblank titles, including projects
+without case-study slugs. Detail links remain disabled until Phase 7.
+
+Unknown categories and repeated category parameters display Category
+unavailable. An absent or empty category parameter selects All projects.
+Valid categories with no projects have their own empty state.
+CMS failures display an availability message rather than an empty result.
+
+Filters use native links, visible focus and aria-current for selection.
+They wrap at narrow widths and support refresh, bookmarks and browser
+history. The page renders on demand; CMS fetches retain the existing
+60-second revalidation configuration.
+
+Phase 6 browser checks passed:
+- Desktop/mobile Projects navigation and keyboard operation.
+- Empty listing, invalid-category recovery and zero-result category.
+- Two projects filtered independently through two CMS categories.
+- Correct counts and selected-filter presentation.
+- Filter persistence through refresh and Back/Forward.
+- Responsive layout without observed horizontal scrolling.
+- Project cover-image delivery without stretching.
+- Missing cover image leaves no empty image area.
+
+Limits: large collections, duplicate category slugs and the CMS-outage
+presentation have not been exercised in browser tests. Pagination is not
+implemented. Reassess query scope and pagination if the collection grows.
+
 ## Current phase
 
 Phase 2 completed and pushed:
@@ -270,8 +308,8 @@ Phase 3 completed and pushed:
 Phase 4 completed and pushed:
 81fad18e84088eb7606b7bb3b97f51bb3f65a59b - portfolio-design-system-and-shell
 
-Phase 5 - Homepage: implementation, source review and production build
-passed. Documentation update and Git checkpoint are being finalized.
+Phase 5 completed and pushed:
+de30ac7c55cc0ef824c20cc2601a460c342f0c21 - cms-driven-homepage
 
 Validation completed:
 - Lint, TypeScript and production build after the portrait-sizing change.
@@ -289,7 +327,8 @@ crop/hotspot and alternative text were retained.
 CMS content changes are separate from Git commits.
 
 Validation limits:
-- Project/blog cover-image delivery has not been directly tested.
+- Project cover-image delivery passed in Phase 6; blog cover-image delivery
+  has not been directly tested.
 - Resume delivery and the populated LinkedIn CTA were not directly tested.
 - Multi-record grid stress cases and comprehensive accessibility checks
   remain for later validation.
@@ -297,13 +336,18 @@ Validation limits:
   homepage outage presentation was source-reviewed, not browser-injected.
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
-Only Home is currently enabled in the main navigation.
-Next: Phase 6, project listing and CMS-managed category filtering.
+Home and Projects are enabled in the main navigation.
+Next: Phase 7, the flexible project case-study route.
 Final content, SEO/security review, deployment and domain work remain later.
 Existing dependency findings remain documented above.
 
-Phase 5 is complete only when the reviewed state is committed, pushed
-and the working tree is clean.
+Phase 6 - Projects Listing: implementation, source review, lint,
+TypeScript, production build and browser checks passed.
+All six Phase 6 test documents were deleted successfully.
+The Git checkpoint remains pending.
+
+Phase 6 is complete only when cleanup is confirmed and the reviewed
+state is committed, pushed and the working tree is clean.
 
 ## Recovery and maintenance
 
