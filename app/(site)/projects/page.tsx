@@ -1,4 +1,5 @@
 import type {Metadata} from 'next'
+import Link from 'next/link'
 import {ProjectCard} from '@/components/ProjectCard'
 import {SectionHeading} from '@/components/ui/SectionHeading'
 import {EmptyState} from '@/components/ui/EmptyState'
@@ -38,6 +39,8 @@ export default async function ProjectsPage({searchParams}: ProjectsPageProps) {
           title="Projects are temporarily unavailable"
           description="Please try again shortly."
         />
+        {/* Full-page navigation intentionally retries the failed CMS request. */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a className="site-button site-button-secondary" href="/projects">
           Try again
         </a>
@@ -74,12 +77,12 @@ export default async function ProjectsPage({searchParams}: ProjectsPageProps) {
         <nav className={styles.filters} aria-label="Filter projects by category">
           <ul>
             <li>
-              <a
+              <Link
                 href="/projects"
                 aria-current={!hasFilter ? 'page' : undefined}
               >
                 All projects
-              </a>
+              </Link>
             </li>
             {availableCategories.map((category) => (
               <li key={category._id}>
@@ -103,9 +106,9 @@ export default async function ProjectsPage({searchParams}: ProjectsPageProps) {
             title="Category unavailable"
             description="Choose one of the available categories or view all projects."
           />
-          <a className="site-button site-button-secondary" href="/projects">
+          <Link className="site-button site-button-secondary" href="/projects">
             View all projects
-          </a>
+          </Link>
         </div>
       ) : (
         <section aria-labelledby="project-results-heading" className={styles.results}>

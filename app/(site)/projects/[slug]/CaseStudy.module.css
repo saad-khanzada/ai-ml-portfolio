@@ -1,0 +1,95 @@
+.article {
+  width: 100%;
+  max-width: 56rem;
+  margin-inline: auto;
+  min-width: 0;
+}
+.back {
+  display: inline-block;
+  color: var(--site-accent);
+  text-decoration: underline;
+  margin-bottom: 2rem;
+}
+.header {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  overflow-wrap: anywhere;
+}
+.date { color: var(--site-text-muted); font-size: 0.875rem; }
+.badges, .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.badges li, .tags li { min-width: 0; overflow-wrap: anywhere; }
+.tags { color: var(--site-text-muted); font-size: 0.875rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.section { margin-top: clamp(2.5rem, 5vw, 4rem); min-width: 0; }
+.heading {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 1.25rem;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+.metrics > div {
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--site-border);
+  border-radius: 0.625rem;
+  background: var(--site-surface);
+  overflow-wrap: anywhere;
+}
+.metrics dt { color: var(--site-text-muted); }
+.metrics dd { margin: 0.5rem 0 0; }
+.metricValue { font-size: 1.5rem; font-weight: 600; }
+.metrics dd p { margin-top: 0.5rem; color: var(--site-text-muted); }
+.gallery { display: grid; gap: 2rem; min-width: 0; }
+@media (min-width: 48rem) {
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Case-study images sized by cropped aspect ratio */
+.article > figure[data-orientation],
+.gallery > figure[data-orientation] {
+  width: 100%;
+  max-width: var(--case-image-width, 56rem);
+  margin-inline: auto;
+}
+
+.article > figure[data-orientation='square'],
+.gallery > figure[data-orientation='square'] {
+  --case-image-width: 36rem;
+}
+
+.article > figure[data-orientation='portrait'],
+.gallery > figure[data-orientation='portrait'] {
+  --case-image-width: 26rem;
+}
+
+.article > figure[data-orientation='tall'],
+.gallery > figure[data-orientation='tall'] {
+  --case-image-width: 22rem;
+}
+
+.article > figure[data-orientation] > img,
+.gallery > figure[data-orientation] > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: none;
+}
+
+.article > figure[data-orientation] > figcaption,
+.gallery > figure[data-orientation] > figcaption {
+  text-align: left;
+}

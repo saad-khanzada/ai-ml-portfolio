@@ -247,8 +247,8 @@ Experience shows up to three records with role and organization.
 Recent writing shows up to three records with a title and valid slug.
 These sections preserve the ordering supplied by the centralized queries.
 
-ProjectCard is reusable. Project and blog detail links remain disabled
-until their corresponding routes are implemented in Phases 7 and 8.
+ProjectCard is reusable. Project titles link to case studies when they
+have a valid slug. Blog detail links remain disabled until Phase 8.
 Cover images require an image URL and alternative text.
 Missing categories, references and optional content render conditionally.
 
@@ -271,14 +271,16 @@ by the category document ID. Filtering occurs on the server over the
 existing project-list query result, preserving its sort order.
 
 All projects includes records with nonblank titles, including projects
-without case-study slugs. Detail links remain disabled until Phase 7.
+without case-study slugs. Valid project slugs enable case-study title links;
+projects without valid slugs remain visible without a detail link.
 
 Unknown categories and repeated category parameters display Category
 unavailable. An absent or empty category parameter selects All projects.
 Valid categories with no projects have their own empty state.
 CMS failures display an availability message rather than an empty result.
 
-Filters use native links, visible focus and aria-current for selection.
+Category filters use native links; All projects and invalid-filter recovery
+use Next.js Link. Links retain visible focus and aria-current for selection.
 They wrap at narrow widths and support refresh, bookmarks and browser
 history. The page renders on demand; CMS fetches retain the existing
 60-second revalidation configuration.
@@ -296,6 +298,70 @@ Phase 6 browser checks passed:
 Limits: large collections, duplicate category slugs and the CMS-outage
 presentation have not been exercised in browser tests. Pagination is not
 implemented. Reassess query scope and pagination if the collection grows.
+
+## Project case studies
+
+/projects/[slug] is a Server Component using getProjectBySlug.
+Missing, invalid or untitled projects use the project not-found view.
+CMS fetch failures display a generic availability message and a full-page
+retry rather than being treated as missing content.
+
+One flexible template conditionally renders project identity, date,
+category, technologies, tags, resource links, rich-text sections, metrics
+and screenshots. Empty optional content is omitted.
+
+ProjectCard now enables valid project detail links by default.
+The case-study page provides Back to projects navigation.
+
+Shared content components:
+- ContentImage validates image references, crop dimensions and alt text.
+- RichText renders Portable Text using next-sanity's existing re-export.
+- Code blocks preserve literal text and line breaks, with optional filename
+  and language metadata separated by an encoding-safe middle dot.
+- Web resource links accept HTTP/HTTPS URLs without embedded credentials.
+  Rich-text links additionally support mailto URLs.
+
+The case-study cover uses a distinct 16:9 Sanity crop requested at
+1440 x 810, preserving the existing crop/hotspot input and alt text.
+It spans the article width without stretching.
+
+Gallery images use their cropped aspect ratio. Maximum figure widths are
+56rem for landscape, 36rem for near-square, 26rem for portrait and 22rem
+for very tall images, constrained by available container width.
+Images retain their proportions; captions share the figure width.
+Viewport-height caps are not used. Very long images can remain vertically
+long, and enlarging low-resolution sources cannot restore missing detail.
+
+These case-study sizing rules do not change homepage cards or the profile
+portrait. Images embedded inside rich text retain the shared full-width
+presentation. The current sizes hint is conservative and can overestimate
+narrow gallery figures; image-payload tuning remains a performance task.
+
+Phase 7 reported browser checks:
+- Missing-project handling and minimal published case-study rendering.
+- Listing title links and Back to projects navigation.
+- Required category and technology selection before Studio publishing.
+- Conditional identity, date, category, skill and optional-content display.
+- Bold, italic, inline code, bullet lists, numbered lists and an external link.
+- Code-block insertion through the Studio editor's three-dot menu.
+- Filename/language fields, Python line breaks and literal special characters.
+- Corrected code metadata separator.
+- Cover and gallery image delivery, caption display and homepage card imagery.
+- Accepted portrait gallery sizing and distinct landscape cover presentation.
+- Metric label/value/context and populated GitHub/Live demo resource buttons.
+- No observed horizontal overflow in the tested desktop and narrow layouts.
+
+Validation limits:
+- Representative square, landscape and extremely tall gallery examples have
+  not all received separate visual acceptance.
+- Rich-text embedded images and every rich-text style/list combination have
+  not been separately exercised.
+- The four other resource button types share the reviewed rendering path
+  but were not individually reported as clicked.
+- An explicit homepage project-title click was not separately recorded.
+- Case-study CMS-outage UI was source-reviewed, not browser-injected.
+- Full accessibility, performance and SEO checks remain in later phases.
+- Final lint, TypeScript and production build passed after the Phase 7 edits.
 
 ## Current phase
 
@@ -337,17 +403,22 @@ Validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 Home and Projects are enabled in the main navigation.
-Next: Phase 7, the flexible project case-study route.
+Phase 7 is implemented and undergoing final closeout.
 Final content, SEO/security review, deployment and domain work remain later.
 Existing dependency findings remain documented above.
 
-Phase 6 - Projects Listing: implementation, source review, lint,
-TypeScript, production build and browser checks passed.
-All six Phase 6 test documents were deleted successfully.
-The Git checkpoint remains pending.
+Phase 6 completed and pushed:
+5cbedeb8f067923ae1e6b66f554c37fdec843ff0 - projects-listing-and-category-filters
 
-Phase 6 is complete only when cleanup is confirmed and the reviewed
-state is committed, pushed and the working tree is clean.
+Implementation, source review, lint, TypeScript, production build and
+browser checks passed. All six Phase 6 test documents were deleted.
+Local and remote commits matched and the working tree was clean.
+
+Phase 7 - Project Case Studies:
+Implementation and final source review completed. Reported browser checks
+passed, including the accepted landscape cover and orientation-aware gallery.
+Final lint, TypeScript and production build passed. The temporary Phase 7
+project, category and skill were deleted. The Git checkpoint remains pending. Phase 7 is not yet recorded as committed or pushed.
 
 ## Recovery and maintenance
 

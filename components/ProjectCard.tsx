@@ -15,7 +15,7 @@ type ProjectCardProps = {
 export function ProjectCard({
   project,
   sizes,
-  enableDetailLink = false,
+  enableDetailLink = true,
 }: ProjectCardProps) {
   const title = project.title?.trim()
   if (!title) return null
