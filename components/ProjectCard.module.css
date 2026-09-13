@@ -48,3 +48,37 @@
     color: var(--site-accent);
   }
 }
+
+/* Whole-card project links */
+.card.clickableCard {
+  position: relative;
+  isolation: isolate;
+}
+
+.card .cardLink {
+  position: static;
+}
+
+.card .cardLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.card .cardLink:focus-visible::after {
+  outline: 3px solid var(--site-focus);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .card.clickableCard:hover {
+    border-color: var(--site-accent);
+  }
+
+  .card.clickableCard:hover .cardLink {
+    color: var(--site-accent);
+  }
+}

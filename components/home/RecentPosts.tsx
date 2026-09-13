@@ -9,29 +9,33 @@ import styles from './HomeSections.module.css'
 
 export function RecentPosts({
   posts,
-  enableDetailLinks = false,
+  enableDetailLinks = true,
+  limit = 3,
+  contained = false,
 }: {
   posts: BLOG_POSTS_QUERY_RESULT
   enableDetailLinks?: boolean
+  limit?: number
+  contained?: boolean
 }) {
   const recent = posts.filter((post) =>
     post.title?.trim() &&
     post.slug &&
     post.slug.length <= 96 &&
     /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(post.slug),
-  ).slice(0, 3)
+  ).slice(0, limit)
 
   if (recent.length === 0) return null
 
   return (
     <section
       aria-labelledby="recent-posts-heading"
-      className="site-container site-section"
+      className={contained ? undefined : 'site-container site-section'}
     >
       <SectionHeading id="recent-posts-heading" title="Recent writing" />
       <div className={styles.blogGrid}>
         {recent.map((post) => {
-          const date = contentDate(post.publishedAt)
+          const date = contentDate(post.publishedAt, true)
           const author = post.author?.name?.trim()
           const excerpt = post.excerpt?.trim()
           const alt = post.coverImage?.alt?.trim()
@@ -40,7 +44,13 @@ export function RecentPosts({
             : null
 
           return (
-            <Card key={post._id} className={styles.blogCard}>
+            <Card
+              key={post._id}
+              className={[
+                styles.blogCard,
+                enableDetailLinks ? styles.clickableCard : '',
+              ].filter(Boolean).join(' ')}
+            >
               {imageUrl && alt && (
                 <Image
                   className={styles.blogImage}
@@ -53,7 +63,9 @@ export function RecentPosts({
               )}
               <h3 className={styles.title}>
                 {enableDetailLinks ? (
-                  <Link href={'/blog/' + post.slug}>{post.title?.trim()}</Link>
+                  <Link className={styles.cardLink} href={'/blog/' + post.slug}>
+                    {post.title?.trim()}
+                  </Link>
                 ) : post.title?.trim()}
               </h3>
               {(date || author) && (

@@ -36,7 +36,10 @@ export function ProjectCard({
     : null
 
   return (
-    <Card className={styles.card}>
+    <Card className={[
+      styles.card,
+      href ? styles.clickableCard : '',
+    ].filter(Boolean).join(' ')}>
       {imageUrl && alt && (
         <Image
           className={styles.image}
@@ -49,7 +52,7 @@ export function ProjectCard({
       )}
       {category && <p className="site-label">{category}</p>}
       <h3 className={styles.title}>
-        {href ? <Link href={href}>{title}</Link> : title}
+        {href ? <Link className={styles.cardLink} href={href}>{title}</Link> : title}
       </h3>
       {summary && <p className={'site-copy ' + styles.summary}>{summary}</p>}
       {technologies.length > 0 && (

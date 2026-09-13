@@ -247,8 +247,9 @@ Experience shows up to three records with role and organization.
 Recent writing shows up to three records with a title and valid slug.
 These sections preserve the ordering supplied by the centralized queries.
 
-ProjectCard is reusable. Project titles link to case studies when they
-have a valid slug. Blog detail links remain disabled until Phase 8.
+ProjectCard is reusable. Project and blog cards link to their detail
+routes when they have valid slugs. Both use one semantic title link with
+a stretched clickable area, visible keyboard focus and subtle hover feedback.
 Cover images require an image URL and alternative text.
 Missing categories, references and optional content render conditionally.
 
@@ -363,6 +364,75 @@ Validation limits:
 - Full accessibility, performance and SEO checks remain in later phases.
 - Final lint, TypeScript and production build passed after the Phase 7 edits.
 
+## Blog implementation
+
+/blog and /blog/[slug] use the existing published-content helpers.
+The listing preserves query ordering and displays articles with nonblank
+titles and valid slugs. RecentPosts is reused: the homepage defaults to
+three articles, while the listing supplies the full visible collection.
+
+Missing articles use the article not-found view with Back to blog.
+CMS fetch failures have separate generic availability messages and
+full-page retry links. No new schemas, queries or dependencies were needed.
+
+Article content includes conditional tags, title, excerpt, author,
+publication date, optional author headline, cover, rich text and related
+project. A related project requires a usable title and valid slug.
+The publication date is display metadata, not a publishing scheduler.
+
+Blog dates use the optional includeDay argument of contentDate, giving
+a format such as Sep 13, 2026 in UTC across the listing, article and
+homepage Recent writing. Existing callers retain their month/year default.
+
+The article uses the Premium Editorial AI palette and existing fonts.
+Back to blog stays left-aligned. Tags, title, excerpt and author/date
+metadata are centered. Normal prose remains left-aligned within a centered
+column, capped at 44rem, with an additional equal 0.5rem inset on narrow
+screens. Code figures and the related-project block retain a 42rem cap.
+
+The landscape cover reuses ContentImage's 16:9 variant. Inline images
+preserve cropped aspect ratios and orientation-aware width limits:
+56rem landscape, 36rem near-square, 26rem portrait and 22rem very tall.
+Captions remain associated with image figures. Shared renderers and
+case-study image presentation were not redesigned.
+
+Article and Project cards now use stretched title links consistently on
+both listings and homepage sections. Each card retains one semantic link
+and one keyboard stop. Cards without valid destinations remain non-interactive.
+The overlay can make selecting card text harder; future secondary controls
+must be designed to avoid overlapping click targets.
+
+Phase 8 reported browser checks:
+- Empty blog, missing article, Back to blog and Blog navigation.
+- Keyboard operation and visible focus.
+- Published title, excerpt, author, body and conditional optional sections.
+- Tags, including the Studio requirement to press Enter to save a tag chip.
+- Day-inclusive dates across all three blog views.
+- Cover and inline-image delivery, captions, H2 and literal code rendering.
+- Homepage article links and related-project navigation.
+- Accepted centered editorial header, reading width and mobile text balance.
+- Whole-card image/text/metadata/padding interactions in all four locations:
+  homepage Featured Projects, homepage Recent writing, /projects and /blog.
+- Clicking outside cards does not navigate.
+- Card dimensions and image sizes remain unchanged, with no reported
+  horizontal overflow in the tested desktop and narrow layouts.
+
+Validation limits:
+- Multi-article ordering and the homepage three-item limit were source-reviewed,
+  not verified with a collection exceeding three published test articles.
+- Large collections, pagination and duplicate article slugs were not tested.
+- CMS-outage presentation was source-reviewed, not browser-injected.
+- Comprehensive assistive-technology, long-form-content and cross-browser
+  testing remain for later accessibility and production QA phases.
+- Image payload tuning, article-specific SEO and final security review remain
+  in their planned later phases.
+- Observed content refreshes do not establish an exact cache-timing guarantee.
+
+Phase 8 implementation and final source review are complete.
+The temporary test article, related project, category and skill were deleted.
+Final lint, TypeScript, production build and whitespace checks passed.
+The Git checkpoint remains pending.
+
 ## Current phase
 
 Phase 2 completed and pushed:
@@ -402,8 +472,8 @@ Validation limits:
   homepage outage presentation was source-reviewed, not browser-injected.
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
-Home and Projects are enabled in the main navigation.
-Phase 7 is implemented and undergoing final closeout.
+Home, Projects and Blog are enabled in the main navigation.
+Phase 7 is complete. Phase 8 is implemented and undergoing final closeout.
 Final content, SEO/security review, deployment and domain work remain later.
 Existing dependency findings remain documented above.
 
@@ -418,7 +488,11 @@ Phase 7 - Project Case Studies:
 Implementation and final source review completed. Reported browser checks
 passed, including the accepted landscape cover and orientation-aware gallery.
 Final lint, TypeScript and production build passed. The temporary Phase 7
-project, category and skill were deleted. The Git checkpoint remains pending. Phase 7 is not yet recorded as committed or pushed.
+project, category and skill were deleted. Phase 7 completed and pushed:
+443dae70f01598d6521bb5023469826a769d55f3 - project-case-study-pages
+
+Local and remote commits matched and the working tree was clean at that
+checkpoint.
 
 ## Recovery and maintenance
 

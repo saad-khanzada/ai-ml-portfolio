@@ -1,0 +1,17 @@
+import Link from 'next/link'
+import {SectionHeading} from '@/components/ui/SectionHeading'
+
+export default function ArticleNotFound() {
+  return (
+    <main id="main-content" tabIndex={-1} className="site-container site-section">
+      <SectionHeading
+        as="h1"
+        title="Article not found"
+        description="This article may have been removed or is not yet published."
+      />
+      <Link className="site-button site-button-secondary" href="/blog">
+        Back to blog
+      </Link>
+    </main>
+  )
+}

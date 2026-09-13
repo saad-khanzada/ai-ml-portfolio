@@ -93,3 +93,38 @@
     color: var(--site-accent);
   }
 }
+
+/* Whole-card article links */
+.blogCard.clickableCard {
+  position: relative;
+  isolation: isolate;
+}
+
+.blogCard .cardLink {
+  position: static;
+}
+
+.blogCard .cardLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.blogCard .cardLink:focus-visible::after {
+  outline: 3px solid var(--site-focus);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .blogCard.clickableCard:hover {
+    border-color: var(--site-accent);
+  }
+
+  .blogCard.clickableCard:hover .cardLink {
+    color: var(--site-accent);
+    text-decoration: underline;
+  }
+}
