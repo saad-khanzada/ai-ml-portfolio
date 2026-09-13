@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type {EXPERIENCE_QUERY_RESULT} from '@/types/sanity.generated'
 import {SectionHeading} from '@/components/ui/SectionHeading'
 import {contentDate} from '@/lib/contentDate'
@@ -9,8 +10,8 @@ export function ExperienceSnapshot({
   experience: EXPERIENCE_QUERY_RESULT
 }) {
   const entries = experience
-    .filter((entry) => entry.role?.trim() && entry.organization?.trim())
-    .slice(0, 3)
+    .filter((entry) => entry.featuredOnHome && entry.role?.trim() && entry.organization?.trim())
+    .slice(0, 2)
 
   if (entries.length === 0) return null
 
@@ -19,13 +20,12 @@ export function ExperienceSnapshot({
       aria-labelledby="experience-heading"
       className="site-container site-section"
     >
-      <SectionHeading id="experience-heading" title="Experience" />
-      <div className={styles.list}>
+      <SectionHeading id="experience-heading" title="Selected experience" />
+      <div className={styles.selectedExperience}>
         {entries.map((entry) => {
           const start = contentDate(entry.startDate)
           const end = contentDate(entry.endDate)
           const location = entry.location?.trim()
-          const description = entry.description?.trim()
 
           return (
             <article key={entry._id} className={styles.entry}>
@@ -45,13 +45,14 @@ export function ExperienceSnapshot({
                   {location && <span>{location}</span>}
                 </div>
               )}
-              {description && (
-                <p className={'site-copy ' + styles.description}>{description}</p>
-              )}
+
             </article>
           )
         })}
       </div>
+      <Link className={styles.experienceLink} href="/experience">
+        View full experience<span aria-hidden="true" style={{marginInlineStart: '0.35em'}}>{'\u2192'}</span>
+      </Link>
     </section>
   )
 }

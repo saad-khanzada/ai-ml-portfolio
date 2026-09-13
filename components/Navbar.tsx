@@ -9,7 +9,7 @@ type NavbarProps = {
   resumeUrl?: string | null
 }
 
-export function Navbar({name, resumeUrl}: NavbarProps) {
+export function Navbar({name}: NavbarProps) {
   const menuRef = useRef<HTMLDetailsElement>(null)
 
   function closeMenu() {
@@ -44,15 +44,6 @@ export function Navbar({name, resumeUrl}: NavbarProps) {
         </nav>
 
         <div className="site-header-actions">
-          {resumeUrl && (
-            <a
-              href={resumeUrl}
-              className="site-button site-button-secondary"
-            >
-              Resume
-            </a>
-          )}
-
           <details
             ref={menuRef}
             className="site-mobile-menu"

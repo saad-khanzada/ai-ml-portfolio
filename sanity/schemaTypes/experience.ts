@@ -32,6 +32,13 @@ export const experience = defineType({
       ),
     }),
     defineField({
+      name: 'featuredOnHome',
+      title: 'Show on homepage',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Select relevant roles for the homepage. At most two selected roles appear, in the existing experience order.',
+    }),
+    defineField({
       name: 'employmentType',
       title: 'Employment type',
       type: 'string',

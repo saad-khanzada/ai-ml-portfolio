@@ -184,6 +184,7 @@ export const EXPERIENCE_QUERY = defineQuery(`
   *[_type == "experience"]
   | order(coalesce(isCurrent, false) desc, startDate desc, _id asc) {
     _id,
+    "featuredOnHome": coalesce(featuredOnHome, false),
     role,
     organization,
     employmentType,

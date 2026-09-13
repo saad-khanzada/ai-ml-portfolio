@@ -202,9 +202,11 @@ Reusable components:
 - Button, ButtonLink, SectionHeading, Card, SkillBadge and EmptyState.
 - ProfileImage with responsive sizing and CMS crop/hotspot support.
 
-Navigation availability is centralized in lib/navigation.ts. Routes that
-have not been implemented are currently non-interactive labels. Enable
-each route when its page is ready; this is temporary development behavior.
+Navigation availability is centralized in lib/navigation.ts.
+Home, About, Projects, Experience, Blog and Contact are enabled.
+The header contains site navigation and the mobile Menu, without a Resume
+button. Resume access remains conditional in the homepage hero and About;
+no Resume link was added to the footer.
 
 ProfileImage returns nothing when its image URL or alternative text is
 unavailable. CMS alternative text takes precedence, with the profile name
@@ -227,7 +229,7 @@ Section order:
 1. Hero
 2. Featured projects
 3. Skills
-4. Experience snapshot
+4. Selected experience
 5. Recent writing
 6. Contact CTA
 
@@ -243,7 +245,11 @@ Alternative text uses CMS text with the profile name as fallback.
 
 Featured projects shows up to three featured records with nonblank titles.
 Skills shows featured skills grouped by their CMS category.
-Experience shows up to three records with role and organization.
+Selected experience shows at most two records explicitly selected in CMS,
+with nonblank role and organization. Unset featuredOnHome values behave
+as false. Existing query ordering is preserved among selected records.
+The compact section omits full descriptions, responsibilities and skills,
+and links to /experience. It disappears when no qualifying record is selected.
 Recent writing shows up to three records with a title and valid slug.
 These sections preserve the ordering supplied by the centralized queries.
 
@@ -431,7 +437,86 @@ Validation limits:
 Phase 8 implementation and final source review are complete.
 The temporary test article, related project, category and skill were deleted.
 Final lint, TypeScript, production build and whitespace checks passed.
-The Git checkpoint remains pending.
+Phase 8 completed and pushed:
+93e1aa3007cd649d05f0054b0c0fb095dc2a9909 - blog-articles-and-editorial-layout
+Local and remote matched and the working tree was clean at that checkpoint.
+
+## About, Experience and Contact
+
+Phase 9 adds /about, /experience and /contact as Server Components using
+existing centralized CMS helpers, generated types and reusable components.
+Optional content is conditional. CMS failures use a generic availability
+message separately from empty content. No new service, dependency,
+authentication, contact form or backend was introduced.
+
+About displays available profile identity, portrait, background, education,
+skills grouped by CMS category, featured certifications and a Resume CTA.
+Certifications require qualifying content and Featured selection.
+Skills do not use percentage ratings.
+
+Experience uses an editorial layout with desktop metadata and content
+columns, mobile stacking and thin separators. It continues to display all
+qualifying published experience records regardless of homepage selection.
+Optional descriptions, responsibilities, skills, logos and external website
+links render conditionally. External links use the label Visit website
+with a decorative arrow.
+
+Experience has an optional featuredOnHome boolean labelled Show on homepage.
+The query projects unset values as false without changing record ordering.
+Homepage selection is explicit, limited to two qualifying records, and
+does not hard-code role relevance. The schema snapshot and generated types
+were refreshed alongside the schema/query change.
+
+Contact retains one H1, an optional introduction, a clickable email address,
+conditional professional profile text links and optional location.
+It avoids duplicate email buttons and heavy cards. Professional links
+retain comfortable touch targets, visible focus and restrained hover feedback.
+
+The global header Resume button was removed. Homepage hero and About retain
+conditional Resume access. The Navbar optional resumeUrl prop remains
+accepted for caller compatibility but is not used to render header content.
+Arrow decorations are hidden from assistive technology.
+No new animation was introduced; motion remains deferred to Phase 10.
+
+Phase 9 reported browser checks:
+- About, Experience and Contact routes, initial content and empty states.
+- Populated Experience role, organization, dates, description and responsibilities.
+- Accepted compact Selected experience and full editorial Experience layouts.
+- Contact email and professional profile links on desktop and mobile.
+- Visible keyboard focus, subtle hover feedback and homepage Experience link.
+- Background bio, education details and skills under CMS-managed categories.
+- Featured certification inclusion and removal after Featured was disabled.
+- About Resume PDF delivery.
+- Header Resume removal, retained Home/About Resume access and mobile Menu
+  navigation, including Escape dismissal.
+- Clean wrapping and no reported horizontal overflow at tested widths.
+
+Validation:
+- Schema validation passed with zero errors and warnings after featuredOnHome.
+- Schema extraction and TypeGen succeeded: nine queries and 26 schema types.
+- Lint, TypeScript, whitespace checks and production build passed for the
+  editorial refinement and text-link polish.
+- Header removal browser checks and its lint, TypeScript, whitespace
+  and production-build validation were confirmed passed.
+
+Validation limits:
+- The Experience external website link was not browser-tested.
+- A multi-record browser test of the homepage two-item cap and selected
+  record ordering has not been confirmed.
+- Experience logos, certification images and every optional external-link
+  combination were not separately reported as exercised.
+- CMS-outage UI was not browser-injected for these pages.
+- Comprehensive accessibility, cross-browser, performance, SEO and security
+  reviews remain for their planned later phases.
+- Observed CMS refreshes do not establish an exact cache-timing guarantee.
+
+Cleanup and checkpoint:
+- User confirmed removal of temporary profile content and the test resume.
+- The cleaned profile was published. Phase 9 test role, Phase 9 test skill
+  and Phase 9 test certification were deleted; cleanup is confirmed.
+- CMS content and asset changes are separate from Git commits.
+- Phase 9 remains uncommitted until reviewed, committed and pushed.
+- Latest confirmed stable checkpoint is Phase 8 commit 93e1aa3.
 
 ## Current phase
 
@@ -462,18 +547,19 @@ Profile test content was cleaned and republished; the user's name, portrait,
 crop/hotspot and alternative text were retained.
 CMS content changes are separate from Git commits.
 
-Validation limits:
-- Project cover-image delivery passed in Phase 6; blog cover-image delivery
-  has not been directly tested.
-- Resume delivery and the populated LinkedIn CTA were not directly tested.
+Historical Phase 5 validation limits:
+- Project cover-image delivery subsequently passed in Phase 6, and blog
+  cover-image delivery passed in Phase 8.
+- About Resume PDF delivery subsequently passed in Phase 9. The populated
+  homepage LinkedIn CTA was not separately recorded as browser-tested.
 - Multi-record grid stress cases and comprehensive accessibility checks
   remain for later validation.
 - The earlier isolated CMS failure test checked fetch behavior; the
   homepage outage presentation was source-reviewed, not browser-injected.
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
-Home, Projects and Blog are enabled in the main navigation.
-Phase 7 is complete. Phase 8 is implemented and undergoing final closeout.
+All six main pages are enabled in navigation.
+Phases 7 and 8 are complete. Phase 9 is undergoing final closeout.
 Final content, SEO/security review, deployment and domain work remain later.
 Existing dependency findings remain documented above.
 

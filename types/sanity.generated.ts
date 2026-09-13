@@ -194,6 +194,7 @@ export type Experience = {
   _rev: string;
   role?: string;
   organization?: string;
+  featuredOnHome?: boolean;
   employmentType?:
     | "full-time"
     | "part-time"
@@ -655,9 +656,10 @@ export type BLOG_POST_BY_SLUG_QUERY_RESULT = {
 
 // Source: sanity/lib/queries.ts
 // Variable: EXPERIENCE_QUERY
-// Query: *[_type == "experience"]  | order(coalesce(isCurrent, false) desc, startDate desc, _id asc) {    _id,    role,    organization,    employmentType,    startDate,    endDate,    "isCurrent": coalesce(isCurrent, false),    location,    workplaceType,    description,    responsibilities,    skills[]-> {      _id,      name,      category    },    organizationLogo,    externalUrl  }
+// Query: *[_type == "experience"]  | order(coalesce(isCurrent, false) desc, startDate desc, _id asc) {    _id,    "featuredOnHome": coalesce(featuredOnHome, false),    role,    organization,    employmentType,    startDate,    endDate,    "isCurrent": coalesce(isCurrent, false),    location,    workplaceType,    description,    responsibilities,    skills[]-> {      _id,      name,      category    },    organizationLogo,    externalUrl  }
 export type EXPERIENCE_QUERY_RESULT = Array<{
   _id: string;
+  featuredOnHome: boolean | false;
   role: string | null;
   organization: string | null;
   employmentType:
@@ -714,7 +716,7 @@ declare global {
     '\n  *[_type == "project" && defined(slug.current) && slug.current == $slug]\n  | order(_id asc) [0] {\n    _id,\n    title,\n    summary,\n    "slug": slug.current,\n    coverImage,\n    projectDate,\n    "featured": coalesce(featured, false),\n    tags,\n    primaryCategory-> {\n      _id,\n      title,\n      "slug": slug.current\n    },\n    technologies[]-> {\n      _id,\n      name,\n      category\n    },\n    problem,\n    objective,\n    approach,\n    content,\n    results,\n    metrics,\n    screenshots,\n    challenges,\n    whatILearned,\n    githubUrl,\n    liveDemoUrl,\n    huggingFaceUrl,\n    notebookUrl,\n    datasetUrl,\n    videoUrl,\n    seoTitle,\n    seoDescription\n  }\n': PROJECT_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "blogPost" && defined(slug.current)]\n  | order(publishedAt desc, _id asc) {\n    _id,\n    title,\n    excerpt,\n    "slug": slug.current,\n    coverImage,\n    publishedAt,\n    tags,\n    "featured": coalesce(featured, false),\n    author-> {\n      _id,\n      name\n    }\n  }\n': BLOG_POSTS_QUERY_RESULT;
     '\n  *[_type == "blogPost" && defined(slug.current) && slug.current == $slug]\n  | order(_id asc) [0] {\n    _id,\n    title,\n    excerpt,\n    "slug": slug.current,\n    coverImage,\n    body,\n    publishedAt,\n    tags,\n    "featured": coalesce(featured, false),\n    author-> {\n      _id,\n      name,\n      headline,\n      profileImage\n    },\n    relatedProject-> {\n      _id,\n      title,\n      summary,\n      "slug": slug.current,\n      coverImage\n    },\n    seoTitle,\n    seoDescription\n  }\n': BLOG_POST_BY_SLUG_QUERY_RESULT;
-    '\n  *[_type == "experience"]\n  | order(coalesce(isCurrent, false) desc, startDate desc, _id asc) {\n    _id,\n    role,\n    organization,\n    employmentType,\n    startDate,\n    endDate,\n    "isCurrent": coalesce(isCurrent, false),\n    location,\n    workplaceType,\n    description,\n    responsibilities,\n    skills[]-> {\n      _id,\n      name,\n      category\n    },\n    organizationLogo,\n    externalUrl\n  }\n': EXPERIENCE_QUERY_RESULT;
+    '\n  *[_type == "experience"]\n  | order(coalesce(isCurrent, false) desc, startDate desc, _id asc) {\n    _id,\n    "featuredOnHome": coalesce(featuredOnHome, false),\n    role,\n    organization,\n    employmentType,\n    startDate,\n    endDate,\n    "isCurrent": coalesce(isCurrent, false),\n    location,\n    workplaceType,\n    description,\n    responsibilities,\n    skills[]-> {\n      _id,\n      name,\n      category\n    },\n    organizationLogo,\n    externalUrl\n  }\n': EXPERIENCE_QUERY_RESULT;
     '\n  *[_type == "certification"]\n  | order(coalesce(featured, false) desc, issueDate desc, _id asc) {\n    _id,\n    title,\n    provider,\n    issueDate,\n    credentialId,\n    credentialUrl,\n    certificateImage,\n    skills[]-> {\n      _id,\n      name,\n      category\n    },\n    "featured": coalesce(featured, false)\n  }\n': CERTIFICATIONS_QUERY_RESULT;
   }
 }
