@@ -109,13 +109,13 @@ private data in published public-dataset content.
 
 Temporary overrides under the frameworks package select:
 - js-yaml 3.15.2
-- smol-toml 1.6.1
+- smol-toml 1.7.1
 
 These address findings in the Sanity CLI dependency tree. Keep the override
 rationale documented and remove overrides when upstream dependencies
 provide suitable fixes and validation passes.
 
-The latest audit reported 12 moderate findings, with no high findings.
+The Phase 12 audit reported 12 moderate findings, with no high or critical findings.
 The remaining underlying advisories concern uuid and adm-zip; dependent
 packages are also counted. This is not a clean audit.
 
@@ -600,11 +600,83 @@ Observation, not a confirmed defect:
   keyboard navigation, did not reproduce it. No workaround was added.
   Investigate only if reproducible behavior or source evidence emerges.
 
-Deferred:
-- Root/default Create Next App metadata remains for Phase 12 metadata work.
+The root/default metadata issue was subsequently addressed in Phase 12.
 
-Phase 11 is manually accepted; documentation and Git closeout are in progress.
-Latest confirmed pushed checkpoint before this closeout is b35c958.
+Phase 11 completed and pushed:
+ec2bdea0469e802062bcbf9681421c6c50c56fbc - responsive-accessibility-review
+Local and remote matched and the working tree was clean at that checkpoint.
+
+## Phase 12 - Metadata, indexing, security and performance
+
+The user accepted Phase 12 after automated validation, browser review and
+a local homepage performance assessment. Git closeout is pending.
+Latest confirmed pushed checkpoint before this closeout:
+ec2bdea0469e802062bcbf9681421c6c50c56fbc - responsive-accessibility-review
+
+Metadata and indexing:
+- Confirmed production origin: https://saadkabeer.online.
+  This configuration does not establish that deployment or DNS is complete.
+- lib/metadata.ts centralizes public metadata using existing CMS helpers.
+- Public pages supply titles, descriptions, canonical URLs, Open Graph and
+  Twitter metadata. Optional social images use available CMS content.
+- Project and article metadata reuse existing detail helpers and SEO fields.
+- Root placeholder metadata was replaced. Studio's own metadata export remains.
+- Filtered Projects URLs canonicalize to /projects.
+- Missing project/article routes returned HTTP 404 with HTML noindex.
+- app/sitemap.ts includes the six public pages and qualifying published
+  Project/Blog routes, excludes Studio and filters, and revalidates at 60 seconds.
+- Sitemap fetching does not silently convert CMS failures into empty collections.
+- app/robots.ts allows crawling and points to the production sitemap.
+  Studio remains crawlable so its HTML noindex can be read.
+
+Security and dependencies:
+- Only the existing nested smol-toml override changed from 1.6.1 to 1.7.1.
+  The separate Sanity CLI 1.8.0 copy and all other locked versions were retained.
+- This addressed the targeted smol-toml advisory:
+  https://github.com/advisories/GHSA-7w5x-hrqm-74c2
+- The resulting audit reported 12 moderate findings and zero high/critical
+  findings. The uuid and adm-zip findings remain; this is not a clean audit.
+- next.config.ts disables X-Powered-By and adds nosniff and
+  strict-origin-when-cross-origin referrer policy.
+- Public routes receive X-Frame-Options: SAMEORIGIN.
+  /studio and its descendants are excluded from that frame rule.
+- VERCEL_ENV=preview adds X-Robots-Tag: noindex.
+  Production and unset/local configuration do not add that header.
+- No CSP or HSTS was added. Reassess these at the pre-launch security review.
+- Indexing controls are not authentication or access restrictions.
+
+Validation:
+- Schema validation passed after the dependency correction.
+- Lint, TypeScript, whitespace checks and production builds passed.
+- Rendered public metadata and canonical URLs were inspected locally.
+- Home/About browser-tab titles were accepted without duplicated branding.
+- robots.txt and sitemap.xml returned HTTP 200 with expected canonical URLs.
+- Header configuration checks passed for production, preview and unset/local.
+- Runtime headers passed for Home, About, Contact, robots.txt, sitemap.xml,
+  /studio and /studio/structure. Studio retained HTML noindex.
+- Home/About, navigation and images worked in the browser. Studio opened
+  Profile / Site Settings with editor fields visible; no CMS content changed.
+- The Incognito homepage Lighthouse mobile performance report scored 96:
+  FCP 1.0s, LCP 2.2s, TBT 190ms, CLS 0 and Speed Index 1.0s.
+- That report had no run warnings. The earlier score of 89 included an
+  IndexedDB warning; the score difference cannot be attributed solely to it.
+- No speculative performance changes were made. Accepted layouts, image
+  sizing and interaction behavior were preserved.
+
+Validation limits and follow-up:
+- Lighthouse measured localhost with simulated mobile conditions and the
+  currently available content. It is not deployed or real-user performance.
+- Image-delivery, loading-priority and JavaScript suggestions remain recorded;
+  further optimization should be justified by representative measurements.
+- Published detail metadata, SEO overrides, social-image previews and dynamic
+  sitemap entries still need representative real-content validation in Phase 13.
+- Actual Vercel preview noindex, production indexing behavior, domain/DNS,
+  HTTPS and deployed headers must be verified after deployment.
+- A sitemap and metadata do not guarantee search indexing.
+- Earlier content-dependent accessibility and responsive limits remain.
+- No temporary Project/Blog content was recreated for unavailable checks.
+- Remaining dependency exposure and final security settings require review
+  before launch. No new service, paid feature or animation dependency was added.
 
 ## Current phase
 
@@ -647,8 +719,8 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 7 through 10 are complete. Phase 11 is accepted and undergoing Git closeout.
-Final content, SEO/security review, deployment and domain work remain later.
+Phases 1 through 11 are complete. Phase 12 is accepted; Git closeout is pending.
+Final content, deployed SEO/security verification, deployment and domain work remain.
 Existing dependency findings remain documented above.
 
 Phase 6 completed and pushed:

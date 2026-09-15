@@ -1,3 +1,4 @@
+import {getPageMetadata} from '@/lib/metadata'
 import type {Metadata} from 'next'
 import {getProfile, getSkills, getCertifications} from '@/sanity/lib/content'
 import {CmsFetchError} from '@/sanity/lib/fetch'
@@ -12,9 +13,12 @@ import {CmsUnavailable} from '@/components/info/CmsUnavailable'
 import {contentDate} from '@/lib/contentDate'
 import styles from '@/components/info/Info.module.css'
 
-export const metadata: Metadata = {
-  title: 'About',
-  description: 'Professional background, skills, education and selected certifications.',
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata({
+    path: '/about',
+    title: 'About',
+    description: 'Professional background, skills, education and selected certifications.',
+  })
 }
 
 function yearLabel(value: number | undefined) {

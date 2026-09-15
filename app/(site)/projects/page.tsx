@@ -1,3 +1,4 @@
+import {getPageMetadata} from '@/lib/metadata'
 import type {Metadata} from 'next'
 import Link from 'next/link'
 import {ProjectCard} from '@/components/ProjectCard'
@@ -7,9 +8,12 @@ import {getProjects, getProjectCategories} from '@/sanity/lib/content'
 import {CmsFetchError} from '@/sanity/lib/fetch'
 import styles from './Projects.module.css'
 
-export const metadata: Metadata = {
-  title: 'Projects',
-  description: 'Explore projects, technologies and technical work.',
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata({
+    path: '/projects',
+    title: 'Projects',
+    description: 'Explore projects, technologies and technical work.',
+  })
 }
 
 type ProjectsPageProps = {

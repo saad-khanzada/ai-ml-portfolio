@@ -1,3 +1,4 @@
+import {getDetailMetadata} from '@/lib/metadata'
 import Link from 'next/link'
 import {notFound} from 'next/navigation'
 import {getBlogPostBySlug} from '@/sanity/lib/content'
@@ -10,6 +11,11 @@ import {EmptyState} from '@/components/ui/EmptyState'
 import styles from '../Blog.module.css'
 
 type PageProps = {params: Promise<{slug: string}>}
+
+export async function generateMetadata({params}: PageProps) {
+  const {slug} = await params
+  return getDetailMetadata('blog', slug)
+}
 
 export default async function ArticlePage({params}: PageProps) {
   const {slug} = await params

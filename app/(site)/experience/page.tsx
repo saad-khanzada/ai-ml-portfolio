@@ -1,3 +1,4 @@
+import {getPageMetadata} from '@/lib/metadata'
 import type {Metadata} from 'next'
 import {getExperience} from '@/sanity/lib/content'
 import {CmsFetchError} from '@/sanity/lib/fetch'
@@ -10,9 +11,12 @@ import {CmsUnavailable} from '@/components/info/CmsUnavailable'
 import {contentDate} from '@/lib/contentDate'
 import styles from '@/components/info/Info.module.css'
 
-export const metadata: Metadata = {
-  title: 'Experience',
-  description: 'Professional experience, responsibilities and applied skills.',
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata({
+    path: '/experience',
+    title: 'Experience',
+    description: 'Professional experience, responsibilities and applied skills.',
+  })
 }
 
 const employmentLabels: Record<string, string> = {

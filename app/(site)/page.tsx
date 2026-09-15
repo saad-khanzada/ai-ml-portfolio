@@ -1,3 +1,4 @@
+import {getPageMetadata} from '@/lib/metadata'
 import {Hero} from '@/components/home/Hero'
 import {getProfile, getProjects, getSkills, getExperience, getBlogPosts} from '@/sanity/lib/content'
 import {ExperienceSnapshot} from '@/components/home/ExperienceSnapshot'
@@ -6,6 +7,10 @@ import {ContactCta} from '@/components/home/ContactCta'
 import {SkillsSection} from '@/components/home/SkillsSection'
 import {FeaturedProjects, selectFeaturedProjects} from '@/components/home/FeaturedProjects'
 import {CmsFetchError} from '@/sanity/lib/fetch'
+
+export async function generateMetadata() {
+  return getPageMetadata({path: '/'})
+}
 
 export default async function Home() {
   let profile: Awaited<ReturnType<typeof getProfile>>

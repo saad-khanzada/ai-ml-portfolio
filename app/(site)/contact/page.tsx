@@ -1,3 +1,4 @@
+import {getPageMetadata} from '@/lib/metadata'
 import type {Metadata} from 'next'
 import {getProfile} from '@/sanity/lib/content'
 import {CmsFetchError} from '@/sanity/lib/fetch'
@@ -7,9 +8,12 @@ import {EmptyState} from '@/components/ui/EmptyState'
 import {CmsUnavailable} from '@/components/info/CmsUnavailable'
 import styles from '@/components/info/Info.module.css'
 
-export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Published contact details and professional profiles.',
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata({
+    path: '/contact',
+    title: 'Contact',
+    description: 'Published contact details and professional profiles.',
+  })
 }
 
 export default async function ContactPage() {

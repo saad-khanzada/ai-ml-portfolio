@@ -1,3 +1,4 @@
+import {getPageMetadata} from '@/lib/metadata'
 import type {Metadata} from 'next'
 import {getBlogPosts} from '@/sanity/lib/content'
 import {CmsFetchError} from '@/sanity/lib/fetch'
@@ -6,9 +7,12 @@ import {SectionHeading} from '@/components/ui/SectionHeading'
 import {EmptyState} from '@/components/ui/EmptyState'
 import styles from './Blog.module.css'
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Technical articles on AI, machine learning and practical development.',
+export async function generateMetadata(): Promise<Metadata> {
+  return getPageMetadata({
+    path: '/blog',
+    title: 'Blog',
+    description: 'Technical articles on AI, machine learning and practical development.',
+  })
 }
 
 export default async function BlogPage() {

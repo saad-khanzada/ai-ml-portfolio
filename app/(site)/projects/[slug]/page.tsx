@@ -1,3 +1,4 @@
+import {getDetailMetadata} from '@/lib/metadata'
 import {notFound} from 'next/navigation'
 import Link from 'next/link'
 import {getProjectBySlug} from '@/sanity/lib/content'
@@ -10,6 +11,11 @@ import {RichText, hasRichText, safeContentUrl} from '@/components/content/RichTe
 import styles from './CaseStudy.module.css'
 
 type PageProps = {params: Promise<{slug: string}>}
+
+export async function generateMetadata({params}: PageProps) {
+  const {slug} = await params
+  return getDetailMetadata('project', slug)
+}
 
 export default async function ProjectPage({params}: PageProps) {
   const {slug} = await params
