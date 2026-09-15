@@ -515,8 +515,45 @@ Cleanup and checkpoint:
 - The cleaned profile was published. Phase 9 test role, Phase 9 test skill
   and Phase 9 test certification were deleted; cleanup is confirmed.
 - CMS content and asset changes are separate from Git commits.
-- Phase 9 remains uncommitted until reviewed, committed and pushed.
-- Latest confirmed stable checkpoint is Phase 8 commit 93e1aa3.
+- Phase 9 completed and pushed:
+  a403e35c928895ac934293301999dd3133bf6274 - about-experience-contact-pages
+- Local and remote matched and the working tree was clean at that checkpoint.
+
+## Restrained interaction transitions
+
+Phase 10 adds CSS-only transitions to existing interaction states:
+- Buttons: background and border colors, 150ms ease-out.
+- Header/footer links: color, 150ms ease-out.
+- Clickable Project and Blog cards: border and title colors, 180ms ease-out.
+- Selected Experience and Contact/Experience links: color, 150ms ease-out.
+
+Transitions apply only when hover is supported and reduced motion is not
+requested. Existing reduced-motion rules remain intact. Focus outlines
+and underline-state changes remain immediate.
+
+No layout, image sizing, content, routing, CMS or dependency changes were
+introduced. No entrance animations, image movement, decorative AI motifs,
+JavaScript animation, smooth scrolling or moving arrows were added.
+
+Validation and acceptance:
+- Lint, TypeScript, whitespace checks and production build passed.
+- Available header/footer links and buttons were manually reviewed.
+- Keyboard focus remained visible.
+- Narrow/mobile navigation and tapping worked without observed overflow.
+- Header-link computed transition-duration was verified as 0.15s normally
+  and 0s under prefers-reduced-motion: reduce.
+- Browser emulation was restored to No emulation.
+- The user explicitly accepted Phase 10.
+
+Validation limits:
+- Project and Blog card hover was not browser-tested because no corresponding
+  documents were published.
+- Absent optional Contact/Experience links were not browser-tested.
+- These CSS paths were source-reviewed; browser checks remain for real-content
+  validation in Phase 13. No temporary CMS content was recreated.
+
+Phase 10 documentation is recorded; its Git checkpoint remains pending.
+Latest confirmed pushed checkpoint before Phase 10 closeout is a403e35.
 
 ## Current phase
 
@@ -559,7 +596,7 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 7 and 8 are complete. Phase 9 is undergoing final closeout.
+Phases 7 through 9 are complete. Phase 10 is accepted and undergoing Git closeout.
 Final content, SEO/security review, deployment and domain work remain later.
 Existing dependency findings remain documented above.
 

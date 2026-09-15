@@ -446,3 +446,15 @@ body {
 .site-shell .site-skip-link:focus {
   transform: translateY(0);
 }
+
+/* Phase 10 restrained interaction transitions */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .site-shell .site-button:not(:disabled) {
+    transition: background-color 150ms ease-out, border-color 150ms ease-out;
+  }
+
+  .site-shell .site-header nav a,
+  .site-shell .site-footer nav a {
+    transition: color 150ms ease-out;
+  }
+}

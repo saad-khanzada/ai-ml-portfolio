@@ -169,3 +169,18 @@
     text-decoration-thickness: 2px;
   }
 }
+
+/* Phase 10 restrained interaction transitions */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .blogCard.clickableCard {
+    transition: border-color 180ms ease-out;
+  }
+
+  .blogCard.clickableCard .cardLink {
+    transition: color 180ms ease-out;
+  }
+
+  .experienceLink {
+    transition: color 150ms ease-out;
+  }
+}

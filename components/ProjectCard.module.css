@@ -82,3 +82,14 @@
     color: var(--site-accent);
   }
 }
+
+/* Phase 10 restrained interaction transitions */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card.clickableCard {
+    transition: border-color 180ms ease-out;
+  }
+
+  .card.clickableCard .cardLink {
+    transition: color 180ms ease-out;
+  }
+}

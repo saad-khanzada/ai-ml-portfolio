@@ -299,3 +299,12 @@
     text-decoration-thickness: 2px;
   }
 }
+
+/* Phase 10 restrained interaction transitions */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .contactEmail,
+  .contactProfiles a,
+  .experienceDetails > a {
+    transition: color 150ms ease-out;
+  }
+}
