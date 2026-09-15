@@ -552,8 +552,59 @@ Validation limits:
 - These CSS paths were source-reviewed; browser checks remain for real-content
   validation in Phase 13. No temporary CMS content was recreated.
 
-Phase 10 documentation is recorded; its Git checkpoint remains pending.
-Latest confirmed pushed checkpoint before Phase 10 closeout is a403e35.
+Phase 10 completed and pushed:
+b35c95801d0ddcb244552c906f3a26b6c282c58c - restrained-interaction-transitions
+Local and remote matched and the working tree was clean at that checkpoint.
+
+## Responsive and accessibility review
+
+Phase 11 reviewed presentation source for landmarks, headings, keyboard
+focus, touch targets, responsive constraints and long-content behavior.
+Previously accepted layouts and Phase 10 motion were preserved.
+
+The only implementation change replaces the undefined --site-bg-muted
+inline-code background reference with the existing --site-surface-muted
+token in components/content/Content.module.css.
+
+Reported browser checks passed for available content:
+- Home and Contact skip links appear during keyboard navigation.
+- Enter moves focus to main content; subsequent Tab continues from there.
+- Home's main focus outline differs visually from Contact, but focus
+  transfer and subsequent keyboard order were confirmed functional.
+- Desktop Tab, Shift+Tab and Enter operate logically with visible focus.
+- Closed mobile Menu links are excluded from Tab navigation; opening the
+  Menu makes its links reachable.
+- Home, About and Contact reflow at 200% and 400% browser zoom without
+  reported clipping, overlap, missing content or page-level horizontal scroll.
+- The Menu remains reachable and usable at high zoom.
+- Browser zoom was restored to 100%.
+
+Lint, TypeScript, whitespace checks and production build passed after
+the single-token correction. The user explicitly accepted Phase 11.
+
+Validation limits:
+- Long Project/Blog titles, long project URLs and long code-line behavior
+  were not browser-tested because suitable published content was unavailable.
+- The corrected inline-code background was source-verified but its rendered
+  appearance was not separately browser-tested.
+- These content-dependent checks remain for Phase 13; no temporary CMS
+  content was recreated.
+- Selected solid-color contrast pairs were calculated from CSS tokens.
+  This was not a complete rendered contrast or accessibility-conformance audit.
+- Comprehensive assistive-technology and cross-browser coverage remains
+  for subsequent production QA.
+
+Observation, not a confirmed defect:
+- Contact briefly appeared incorrectly once after keyboard navigation to
+  GitHub and Chrome Back. Refresh restored it. Repeated attempts, including
+  keyboard navigation, did not reproduce it. No workaround was added.
+  Investigate only if reproducible behavior or source evidence emerges.
+
+Deferred:
+- Root/default Create Next App metadata remains for Phase 12 metadata work.
+
+Phase 11 is manually accepted; documentation and Git closeout are in progress.
+Latest confirmed pushed checkpoint before this closeout is b35c958.
 
 ## Current phase
 
@@ -596,7 +647,7 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 7 through 9 are complete. Phase 10 is accepted and undergoing Git closeout.
+Phases 7 through 10 are complete. Phase 11 is accepted and undergoing Git closeout.
 Final content, SEO/security review, deployment and domain work remain later.
 Existing dependency findings remain documented above.
 
