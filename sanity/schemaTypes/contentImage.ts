@@ -10,7 +10,7 @@ export const contentImage = defineType({
       name: 'displaySize',
       title: 'Screenshot display size',
       type: 'string',
-      description: 'Project section and gallery screenshots only. Empty means Auto. Resizes the complete image without cropping. Covers and other pages keep their existing treatment.',
+      description: 'Applies to Project section/gallery images and Blog body images. Empty means Auto. Resizes your saved Sanity composition without additional cropping. Cover images and other pages keep their existing treatment.',
       options: {
         list: [
           {title: 'Auto', value: 'auto'},

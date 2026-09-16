@@ -58,7 +58,7 @@ const components = {
   },
 } satisfies NonNullable<ComponentProps<typeof PortableText>['components']>
 
-const projectComponents = {
+const screenshotComponents = {
   ...components,
   types: {
     ...components.types,
@@ -68,14 +68,20 @@ const projectComponents = {
   },
 } satisfies NonNullable<ComponentProps<typeof PortableText>['components']>
 
-export function RichText({value, projectImages = false}: {
+export function RichText({
+  value,
+  projectImages = false,
+  screenshotImages = false,
+}: {
   value: RichTextValue | null | undefined
   projectImages?: boolean
+  screenshotImages?: boolean
 }) {
-  if (!value || !hasRichText(value, projectImages)) return null
+  const useScreenshotImages = projectImages || screenshotImages
+  if (!value || !hasRichText(value, useScreenshotImages)) return null
   return (
     <div className={projectImages ? styles.prose + ' ' + styles.projectProse : styles.prose}>
-      <PortableText value={value} components={projectImages ? projectComponents : components} />
+      <PortableText value={value} components={useScreenshotImages ? screenshotComponents : components} />
     </div>
   )
 }

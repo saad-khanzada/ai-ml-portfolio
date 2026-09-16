@@ -87,9 +87,9 @@ export default async function ArticlePage({params}: PageProps) {
 
         <ContentImage image={post.coverImage} variant="cover" preload />
 
-        {hasRichText(post.body) && (
+        {hasRichText(post.body, true) && (
           <div className={styles.body}>
-            <RichText value={post.body} />
+            <RichText value={post.body} screenshotImages />
           </div>
         )}
 

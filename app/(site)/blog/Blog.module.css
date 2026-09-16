@@ -44,18 +44,18 @@
   margin-top: clamp(2.5rem, 5vw, 4rem);
   min-width: 0;
 }
-.body figure[data-orientation] {
+.body figure[data-orientation]:not([data-display-size]) {
   width: 100%;
   max-width: var(--article-image-width, 56rem);
   margin-inline: auto;
 }
-.body figure[data-orientation='square'] {
+.body figure[data-orientation='square']:not([data-display-size]) {
   --article-image-width: 36rem;
 }
-.body figure[data-orientation='portrait'] {
+.body figure[data-orientation='portrait']:not([data-display-size]) {
   --article-image-width: 26rem;
 }
-.body figure[data-orientation='tall'] {
+.body figure[data-orientation='tall']:not([data-display-size]) {
   --article-image-width: 22rem;
 }
 .related {
@@ -167,7 +167,7 @@
   text-align: left;
 }
 
-.article .body > div > * {
+.article .body > div > :not([data-display-size]) {
   box-sizing: border-box;
   width: 100%;
   max-width: 42rem;
@@ -210,7 +210,7 @@
 }
 
 /* Wider images remain within the existing article boundary. */
-.article .body > div > figure[data-orientation] {
+.article .body > div > figure[data-orientation]:not([data-display-size]) {
   max-width: var(--article-image-width, 56rem);
   margin-block: 2rem;
 }
@@ -246,4 +246,12 @@
   .article .body > div > :is(p, ul, ol, blockquote, h2, h3, h4) {
     width: calc(100% - 1rem);
   }
+}
+
+/* Shared screenshot sizing controls width; retain Blog figure spacing. */
+.article .body > div > figure[data-display-size] {
+  margin-block: 2rem;
+}
+.article .body > div > figure[data-display-size]:first-child {
+  margin-top: 0;
 }

@@ -723,12 +723,52 @@ Validation limits:
 - No temporary CMS records were created to fill unavailable test cases.
 - Previously documented validation limits remain unless explicitly superseded.
 
+Project refinement checkpoint completed and pushed:
+a6edbcccfbadea0fda9e1f36f7bfcfb4c7e90ba4 - refine-project-case-study-and-screenshot-sizing
+
 Follow-up:
-- Blog body images do not yet use the screenshot presets.
-- Blog image sizing will be a separate scoped change, preserving Blog covers
-  and the established Blog text layout.
+- Blog body image sizing was subsequently implemented and accepted below.
 - Remaining Phase 13 content and real-content validation are still pending.
 - CMS publications and asset changes are separate from Git commits.
+
+## Phase 13 - Blog body image sizing
+
+Blog body images reuse the accepted Project screenshot renderer:
+- Auto, Compact, Standard and Wide control proportional display sizing.
+- Empty displaySize continues to behave as Auto.
+- Saved Sanity crop settings are respected without additional preset cropping.
+- Captions follow the displayed image width.
+- View full image opens the same approved composition in a new tab.
+- Blog covers retain their existing independent treatment.
+- Blog typography and reading-column styling are preserved.
+- Project screenshot behavior and Project text styling remain unchanged.
+
+Implementation:
+- RichText separates screenshot rendering from Project-only prose styling.
+- Blog width rules exclude images managed by the shared screenshot renderer.
+- The existing displaySize field is reused; only its help text changed.
+- Schema extraction completed without a generated schema diff.
+- No query, dependency, stored field type or CMS-content changes were needed.
+
+Validation and acceptance:
+- Schema validation, lint, TypeScript, whitespace checks and build passed.
+- A temporary development-only page used the actual Blog styles and renderer.
+- The user checked Auto, Compact, Standard and Wide on desktop and mobile.
+- Images remained proportional and within the layout.
+- Captions followed image width; Blog text and cover styling were unchanged.
+- Full-image links opened the cropped composition in a new tab.
+- Keyboard Tab and Enter behavior passed.
+- The real RAG project retained its accepted presentation.
+- The user accepted the Blog image extension and authorized cleanup and commit.
+- The temporary test page was removed before checkpoint creation.
+- No temporary Sanity documents were created or published.
+
+Validation limits:
+- Portrait and wide test shapes were intentional crops of an existing screenshot,
+  not independent full-length portrait and panoramic source images.
+- These checks do not establish readability for every future technical image.
+- Representative published Blog content and broader real-content checks remain
+  part of Phase 13. Earlier limits remain unless explicitly superseded.
 
 ## Current phase
 
