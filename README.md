@@ -609,9 +609,9 @@ Local and remote matched and the working tree was clean at that checkpoint.
 ## Phase 12 - Metadata, indexing, security and performance
 
 The user accepted Phase 12 after automated validation, browser review and
-a local homepage performance assessment. Git closeout is pending.
-Latest confirmed pushed checkpoint before this closeout:
-ec2bdea0469e802062bcbf9681421c6c50c56fbc - responsive-accessibility-review
+a local homepage performance assessment. Phase 12 was committed and pushed:
+04e5fa3e05931395aa055cabe2288f1e907afca1 - seo-security-and-performance-review
+Local and remote matched and the working tree was clean at that checkpoint.
 
 Metadata and indexing:
 - Confirmed production origin: https://saadkabeer.online.
@@ -678,6 +678,58 @@ Validation limits and follow-up:
 - Remaining dependency exposure and final security settings require review
   before launch. No new service, paid feature or animation dependency was added.
 
+## Phase 13 - Accepted project presentation checkpoint
+
+The published RAG case study informed a shared Project template refinement.
+This checkpoint preserves the accepted Project changes before separate Blog
+image-sizing work. It does not mark Phase 13 complete.
+
+Presentation:
+- Project titles use a smaller desktop maximum and explicit heading line spacing.
+- Major section headings and desktop section spacing were refined.
+- Body text uses a centered reading column; screenshots can remain wider.
+- Existing cover treatment, routes and unrelated page layouts were preserved.
+
+Project screenshots:
+- Optional displaySize supports Auto, Compact, Standard and Wide.
+- An unset value behaves as Auto without migrating existing CMS records.
+- Inline case-study images and screenshot-gallery items share the renderer.
+- Images shrink proportionally within available space and preview-height limits.
+- The sizing rules avoid enlargement beyond the image composition's natural width.
+- Intentional Sanity crop settings are respected in previews and full-image links.
+- Presets do not add cropping or stretching to satisfy width or height bounds.
+- Captions follow the displayed image width.
+- View full image opens the approved composition at full resolution in a new tab,
+  with visible new-tab wording and an accessible link label.
+- Cover images remain independent of screenshot presets.
+
+Validation and acceptance:
+- Schema validation passed with zero errors and warnings.
+- Schema extraction and type generation succeeded.
+- Lint, TypeScript, whitespace checks and production build passed.
+- Installed image-builder checks passed for uncropped and intentionally cropped
+  preview/full-image URLs, including an image with hotspot metadata.
+- The user accepted the real RAG page presentation and reported Auto, Compact
+  and Standard working well.
+- The full-image link opened in a new tab.
+- After the saved-crop correction, the user reviewed the running site and
+  confirmed the behavior passed.
+
+Validation limits:
+- Dedicated portrait-image and screenshot-gallery browser coverage has not
+  been separately confirmed for the new shared sizing implementation.
+- Exhaustive preset-by-orientation, keyboard, mobile and cross-browser coverage
+  is not claimed by this checkpoint.
+- No temporary CMS records were created to fill unavailable test cases.
+- Previously documented validation limits remain unless explicitly superseded.
+
+Follow-up:
+- Blog body images do not yet use the screenshot presets.
+- Blog image sizing will be a separate scoped change, preserving Blog covers
+  and the established Blog text layout.
+- Remaining Phase 13 content and real-content validation are still pending.
+- CMS publications and asset changes are separate from Git commits.
+
 ## Current phase
 
 Phase 2 completed and pushed:
@@ -719,7 +771,7 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 1 through 11 are complete. Phase 12 is accepted; Git closeout is pending.
+Phases 1 through 12 are complete. Phase 13 real-content work is in progress.
 Final content, deployed SEO/security verification, deployment and domain work remain.
 Existing dependency findings remain documented above.
 

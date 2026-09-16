@@ -52,13 +52,13 @@ export default async function ProjectPage({params}: PageProps) {
     {id: 'results', title: 'Results', value: project.results},
     {id: 'challenges', title: 'Challenges', value: project.challenges},
     {id: 'lessons', title: 'What I learned', value: project.whatILearned},
-  ].filter((section) => hasRichText(section.value))
+  ].filter((section) => hasRichText(section.value, true))
 
   const metrics = (project.metrics ?? []).filter((metric) =>
     metric?.label?.trim() && metric?.value?.trim(),
   )
   const screenshots = (project.screenshots ?? []).filter((image) =>
-    imagePresentation(image),
+    imagePresentation(image, true),
   )
   const technologies = (project.technologies ?? []).filter((skill) =>
     skill?.name?.trim(),
@@ -90,7 +90,7 @@ export default async function ProjectPage({params}: PageProps) {
           {project.primaryCategory?.title?.trim() && (
             <p className="site-label">{project.primaryCategory.title.trim()}</p>
           )}
-          <h1 className="site-heading-lg">{project.title.trim()}</h1>
+          <h1 className={styles.title}>{project.title.trim()}</h1>
           {project.summary?.trim() && (
             <p className="site-copy">{project.summary.trim()}</p>
           )}
@@ -146,7 +146,7 @@ export default async function ProjectPage({params}: PageProps) {
             <h2 id={'project-' + section.id} className={styles.heading}>
               {section.title}
             </h2>
-            <RichText value={section.value} />
+            <RichText value={section.value} projectImages />
           </section>
         ))}
 
@@ -174,7 +174,7 @@ export default async function ProjectPage({params}: PageProps) {
             <h2 id="project-gallery" className={styles.heading}>Screenshots</h2>
             <div className={styles.gallery}>
               {screenshots.map((image) => (
-                <ContentImage key={image._key} image={image} />
+                <ContentImage key={image._key} image={image} variant="projectScreenshot" />
               ))}
             </div>
           </section>

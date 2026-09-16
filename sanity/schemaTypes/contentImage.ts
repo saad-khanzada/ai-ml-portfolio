@@ -7,6 +7,26 @@ export const contentImage = defineType({
   options: {hotspot: true},
   fields: [
     defineField({
+      name: 'displaySize',
+      title: 'Screenshot display size',
+      type: 'string',
+      description: 'Project section and gallery screenshots only. Empty means Auto. Resizes the complete image without cropping. Covers and other pages keep their existing treatment.',
+      options: {
+        list: [
+          {title: 'Auto', value: 'auto'},
+          {title: 'Compact', value: 'compact'},
+          {title: 'Standard', value: 'standard'},
+          {title: 'Wide', value: 'wide'},
+        ],
+        layout: 'dropdown',
+      },
+      validation: (Rule) => Rule.custom((value) =>
+        value === undefined || ['auto', 'compact', 'standard', 'wide'].includes(value)
+          ? true
+          : 'Choose one of the listed screenshot sizes.',
+      ),
+    }),
+    defineField({
       name: 'alt',
       title: 'Alternative text',
       type: 'string',

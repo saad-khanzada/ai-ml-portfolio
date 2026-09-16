@@ -93,6 +93,7 @@ export type ContentImage = {
   media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
+  displaySize?: "auto" | "compact" | "standard" | "wide";
   alt?: string;
   caption?: string;
 };

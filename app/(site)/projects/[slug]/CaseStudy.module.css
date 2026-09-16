@@ -57,31 +57,26 @@
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* Case-study images sized by cropped aspect ratio */
-.article > figure[data-orientation],
-.gallery > figure[data-orientation] {
+/* Keep the accepted cover treatment; screenshots use the shared renderer. */
+.article > figure[data-orientation] {
   width: 100%;
   max-width: var(--case-image-width, 56rem);
   margin-inline: auto;
 }
 
-.article > figure[data-orientation='square'],
-.gallery > figure[data-orientation='square'] {
+.article > figure[data-orientation='square'] {
   --case-image-width: 36rem;
 }
 
-.article > figure[data-orientation='portrait'],
-.gallery > figure[data-orientation='portrait'] {
+.article > figure[data-orientation='portrait'] {
   --case-image-width: 26rem;
 }
 
-.article > figure[data-orientation='tall'],
-.gallery > figure[data-orientation='tall'] {
+.article > figure[data-orientation='tall'] {
   --case-image-width: 22rem;
 }
 
-.article > figure[data-orientation] > img,
-.gallery > figure[data-orientation] > img {
+.article > figure[data-orientation] > img {
   display: block;
   width: 100%;
   height: auto;
@@ -89,7 +84,28 @@
   max-height: none;
 }
 
-.article > figure[data-orientation] > figcaption,
-.gallery > figure[data-orientation] > figcaption {
+.article > figure[data-orientation] > figcaption {
   text-align: left;
+}
+
+/* Project case-study hierarchy and reading width. */
+.title {
+  margin: 0;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.heading {
+  max-width: 44rem;
+  margin-inline: auto;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 64rem) {
+  .section { margin-top: 5rem; }
+  .heading {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+  }
 }

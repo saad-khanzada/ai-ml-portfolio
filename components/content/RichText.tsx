@@ -17,13 +17,13 @@ export function safeContentUrl(value: unknown, allowMail = false): string | null
   }
 }
 
-export function hasRichText(value: RichTextValue | null | undefined): boolean {
+export function hasRichText(value: RichTextValue | null | undefined, projectImages = false): boolean {
   return Boolean(value?.some((item) => {
     if (item._type === 'block') {
       return item.children?.some((span) => span.text?.trim())
     }
     if (item._type === 'codeBlock') return Boolean(item.code?.trim())
-    if (item._type === 'contentImage') return Boolean(imagePresentation(item))
+    if (item._type === 'contentImage') return Boolean(imagePresentation(item, projectImages))
     return false
   }))
 }
@@ -58,11 +58,24 @@ const components = {
   },
 } satisfies NonNullable<ComponentProps<typeof PortableText>['components']>
 
-export function RichText({value}: {value: RichTextValue | null | undefined}) {
-  if (!value || !hasRichText(value)) return null
+const projectComponents = {
+  ...components,
+  types: {
+    ...components.types,
+    contentImage: ({value}: {value: ImageValue}) => (
+      <ContentImage image={value} variant="projectScreenshot" />
+    ),
+  },
+} satisfies NonNullable<ComponentProps<typeof PortableText>['components']>
+
+export function RichText({value, projectImages = false}: {
+  value: RichTextValue | null | undefined
+  projectImages?: boolean
+}) {
+  if (!value || !hasRichText(value, projectImages)) return null
   return (
-    <div className={styles.prose}>
-      <PortableText value={value} components={components} />
+    <div className={projectImages ? styles.prose + ' ' + styles.projectProse : styles.prose}>
+      <PortableText value={value} components={projectImages ? projectComponents : components} />
     </div>
   )
 }

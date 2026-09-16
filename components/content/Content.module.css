@@ -60,3 +60,63 @@
   white-space: pre;
 }
 .codeBlock figcaption { margin: 0 0 0.625rem; }
+
+/* Opt-in project screenshot presentation; other image uses stay unchanged. */
+.projectScreenshot {
+  width: min(
+    100%,
+    var(--screenshot-native-width),
+    var(--screenshot-preset-width),
+    var(--screenshot-mobile-width)
+  );
+  max-width: 100%;
+  margin-inline: auto;
+}
+.projectScreenshot > .image {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.projectScreenshot > figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.fullImageLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  min-height: 2.75rem;
+  max-width: 100%;
+  flex-wrap: wrap;
+  color: var(--site-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.fullImageLink:hover {
+  text-decoration-thickness: 2px;
+}
+.fullImageLink:focus-visible {
+  outline: 3px solid var(--site-focus);
+  outline-offset: 4px;
+}
+.projectProse > :not(figure) {
+  max-width: 44rem;
+  margin-inline: auto;
+}
+.projectProse > .projectScreenshot {
+  margin-block: 2rem;
+}
+.projectProse h2 { font-size: 1.75rem; }
+.projectProse h3 { font-size: 1.375rem; }
+.projectProse h4 { font-size: 1.125rem; }
+@media (min-width: 64rem) {
+  .projectScreenshot {
+    width: min(
+      100%,
+      var(--screenshot-native-width),
+      var(--screenshot-preset-width),
+      var(--screenshot-desktop-width)
+    );
+  }
+}
