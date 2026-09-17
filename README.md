@@ -770,6 +770,51 @@ Validation limits:
 - Representative published Blog content and broader real-content checks remain
   part of Phase 13. Earlier limits remain unless explicitly superseded.
 
+## Phase 13 - Projects archive card refinement
+
+The user accepted the shared ProjectCard Featured/Listing separation after
+reviewing the real pages and a local representative-card test page.
+
+Presentation:
+- Homepage Featured cards retain their existing presentation.
+- The Projects archive uses compact horizontal Listing cards.
+- The archive has one column below 64rem and two columns from 64rem upward.
+- Titles remain fully visible without line clamping or fixed card heights.
+- Below 40rem, listings show the thumbnail, category and title.
+- From 40rem, summaries show at most two visible lines.
+- Listings show up to three technologies and a +N indicator for additional items.
+- Thumbnail framing remains 16:10.
+- Flex wrapping allows a small thumbnail above the text when space is insufficient.
+- Missing images and summaries do not leave placeholder areas.
+- Existing whole-card links, focus behavior and restrained hover treatment remain.
+- Existing category filters and result counts are retained.
+- No pagination, Load More, infinite scroll or additional filters were introduced.
+- No CMS schema, query, dependency, global token, case-study or Blog image changes.
+
+Reported browser acceptance:
+- Homepage Featured Projects remained visually unchanged.
+- Archive presentation worked at desktop, tablet and narrow mobile widths.
+- Long titles remained visible.
+- Missing-image and missing-summary examples behaved correctly.
+- Technology limiting and +N behavior matched expectations.
+- No horizontal overflow was observed at 200% zoom.
+- The user accepted the refinement and authorized closeout.
+
+Representative validation:
+- A development-only page displayed 24 in-memory examples derived from an
+  existing published project, including eight repeated content cases.
+- No temporary Sanity records were created or published.
+- Test links intentionally reused the original project's detail URL.
+- The temporary review page was removed before checkpoint creation.
+
+Validation limits:
+- Repeated examples test layout density, not a database of 24 unique projects.
+- This does not establish performance for every future image/content combination.
+- Comprehensive cross-browser and assistive-technology coverage is not claimed.
+- Previously documented validation limits remain unless explicitly superseded.
+
+Phase 13 content work remains ongoing.
+
 ## Current phase
 
 Phase 2 completed and pushed:

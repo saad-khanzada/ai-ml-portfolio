@@ -32,6 +32,7 @@ export function FeaturedProjects({
           <ProjectCard
             key={project._id}
             project={project}
+            variant="featured"
             sizes="(min-width: 1200px) 400px, (min-width: 768px) 50vw, 100vw"
           />
         ))}

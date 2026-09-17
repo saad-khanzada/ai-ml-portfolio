@@ -129,7 +129,8 @@ export default async function ProjectsPage({searchParams}: ProjectsPageProps) {
                 <ProjectCard
                   key={project._id}
                   project={project}
-                  sizes="(min-width: 1200px) 400px, (min-width: 768px) 50vw, 100vw"
+                  variant="listing"
+                  sizes="(min-width: 80rem) 10rem, (min-width: 40rem) 8rem, 6rem"
                 />
               ))}
             </div>

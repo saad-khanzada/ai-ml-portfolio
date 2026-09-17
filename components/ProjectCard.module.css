@@ -93,3 +93,83 @@
     transition: color 180ms ease-out;
   }
 }
+
+/* Archive-only presentation. Featured cards retain their existing styles. */
+.card.listing[data-variant='listing'] {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem;
+}
+.card.listing > .image {
+  flex: 0 0 auto;
+  width: clamp(5rem, 18vw, 6rem);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+}
+.listingBody {
+  flex: 1 1 12rem;
+  min-width: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.listingBody > p {
+  margin: 0;
+}
+.card.listing .title {
+  font-size: 1.125rem;
+  line-height: 1.35;
+}
+.card.listing .summary,
+.card.listing .skills {
+  display: none;
+}
+.card.listing .skills {
+  gap: 0.375rem;
+  align-items: center;
+}
+.card.listing .skills > li {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.card.listing .skills :global(.site-badge) {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+.moreTechnologies {
+  display: inline-block;
+  padding: 0.25rem;
+  color: var(--site-text-muted);
+  font-size: 0.8125rem;
+}
+@media (min-width: 40rem) {
+  .card.listing[data-variant='listing'] {
+    gap: 1rem;
+  }
+  .card.listing > .image {
+    width: 8rem;
+  }
+  .card.listing .title {
+    font-size: 1.25rem;
+  }
+  .card.listing .summary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    white-space: normal;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+  .card.listing .skills {
+    display: flex;
+  }
+}
+@media (min-width: 80rem) {
+  .card.listing > .image {
+    width: 10rem;
+  }
+}
