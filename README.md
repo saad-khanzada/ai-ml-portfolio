@@ -909,6 +909,62 @@ Next:
 - Hostinger DNS remains unchanged until Phase 15.
 - Final production QA and V1 launch acceptance remain in Phase 16.
 
+## Phase 14 - Vercel deployment acceptance and closeout
+
+Phase 14 deployment is accepted following successful Vercel deployment,
+public HTTP checks and the user's desktop, mobile and Studio verification.
+This closes the Vercel deployment phase; Version 1 is not yet declared launched.
+
+Deployment configuration:
+- GitHub repository: saad-khanzada/ai-ml-portfolio; production branch: main.
+- Validated application checkpoint:
+  e81d7f9866f15278cf855c6ec1119b3e56576032.
+- Main Vercel URL: https://ai-ml-portfolio-swart.vercel.app.
+- Next.js preset, repository root, npm ci and npm run build.
+- Output directory uses the Next.js default.
+- Required public Sanity configuration is set for Production and Preview.
+- Node.js 22.x was saved in Vercel settings before a successful redeployment.
+- The production redeployment reached Ready.
+- UUID and ESLint deprecation warnings did not prevent deployment.
+- No optional analytics, Speed Insights or other integration was added.
+
+Studio access:
+- Exact CORS origin https://ai-ml-portfolio-swart.vercel.app was added
+  with credentials allowed; the existing localhost origin was retained.
+- No wildcard or /studio path was added to the CORS origin.
+- The user signed in through Google using the existing Sanity account.
+- Deployed Studio and Profile / Site Settings loaded without access errors.
+- No CMS content was edited or published during this access check.
+
+Verification:
+- Home, About, Projects, RAG detail, Experience, Blog and Contact returned HTTP 200.
+- Public titles, descriptions, canonical URLs and Open Graph titles/URLs
+  were inspected and matched the configured V1 content and production origin.
+- Sitemap returned HTTP 200 with exactly the seven expected V1 URLs.
+- Robots returned HTTP 200, allowed crawling and referenced the sitemap.
+- Missing general, project and article routes returned HTTP 404 with noindex.
+- Public responses included nosniff and SAMEORIGIN frame protection.
+- No X-Powered-By response header was observed in the checked routes.
+- Studio HTML contained noindex and omitted the public frame restriction.
+- The user confirmed desktop pages and professional links worked.
+- The user confirmed the main URL opened on a phone over mobile data,
+  with working mobile navigation and RAG image loading outside Vercel sign-in.
+- Before this documentation change, local main and origin/main matched
+  the application checkpoint above with a clean working tree.
+
+Limits and remaining roadmap:
+- These checks do not constitute comprehensive production QA.
+- CMS publishing/revalidation, broader accessibility, performance and final
+  security checks remain in Phase 16; this review did not mutate CMS content.
+- Recorded dependency findings and historical validation limits remain.
+- Canonical URLs and sitemap entries intentionally use saadkabeer.online;
+  this does not establish that the custom domain is connected.
+- No Hostinger DNS or custom-domain configuration was changed in Phase 14.
+- This closeout changes documentation only. Git does not back up CMS content.
+- A documentation push may trigger the existing Vercel Git integration.
+- Phase 15: Hostinger custom-domain integration, HTTPS and redirect verification.
+- Phase 16: Final production QA and explicit Version 1 launch acceptance.
+
 ## Current phase
 
 Phase 2 completed and pushed:
@@ -950,8 +1006,8 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 1 through 13 are complete. Phase 14 - Vercel Deployment is in progress.
-V1 content is accepted. Vercel deployment, Hostinger domain integration and final production QA remain in Phases 14, 15 and 16 respectively.
+Phases 1 through 14 are complete. Phase 15 - Hostinger Domain Integration is next and has not started.
+V1 content and Vercel deployment are accepted. Hostinger domain integration and final production QA remain in Phases 15 and 16 respectively.
 Existing dependency findings remain documented above.
 
 Phase 6 completed and pushed:
