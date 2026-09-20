@@ -813,7 +813,71 @@ Validation limits:
 - Comprehensive cross-browser and assistive-technology coverage is not claimed.
 - Previously documented validation limits remain unless explicitly superseded.
 
-Phase 13 content work remains ongoing.
+The archive refinement was followed by the Phase 13 content closeout below.
+
+## Phase 13 - Real content acceptance and closeout
+
+Phase 13 real-content work is accepted following the published-content review,
+successful local automated checks and the user's six-page browser acceptance.
+This closes the content phase; it does not declare Version 1 launched.
+
+Accepted V1 content:
+- Profile introduction, bio, portrait, education and professional links.
+- Public contact email: saadkabeer.ai@gmail.com. The earlier typo was corrected.
+- Facebook was removed at the user's request.
+- AI/ML Engineer Intern at Arch Technologies and Computer Science Teacher
+  at Adson International School are published and accepted.
+- Selected certifications:
+  - InnoQuest Bootcamp in Artificial Intelligence and Machine Learning,
+    InnoVista Pvt Limited.
+  - Python for Data Science, AI & Development, IBM.
+  - AI for Everyone, DeepLearning.AI.
+- The user confirmed certification dates came from the certificates and
+  verified the available IBM and DeepLearning.AI credential links.
+- The user confirmed public LinkedIn and Hugging Face links work.
+- One published RAG Document Q&A case study is sufficient for V1.
+- RAG content distinguishes observed factual tests from overall accuracy
+  and states the temporary deployment and evaluation limitations.
+- Blog has no published articles and retains its accepted empty state.
+- Resume remains absent and its links remain hidden for V1.
+- Skills remain available on About and linked records. No featured skills
+  are selected, so the homepage Skills section is intentionally omitted.
+- Additional projects and articles are deferred until after V1 launch.
+
+Validation:
+- Published review found one profile, two experiences, three certifications,
+  one project, one project category, ten skills and zero blog posts.
+- Reviewed content and image-asset references resolved successfully.
+- No obvious missing required content or stale test content was found.
+- Local schema-definition validation passed with zero errors and warnings.
+- Lint, TypeScript, whitespace checks and production build passed.
+- Home, About, Experience, Contact, Projects and Blog returned HTTP 200.
+- The user accepted the brief six-page local browser review.
+- RAG detail returned HTTP 200 with the expected title, description,
+  canonical URL and Open Graph title and URL.
+- The first title assertion compared raw HTML and falsely rejected &amp;.
+  Decoding confirmed the correct Q&A title; no website fix was needed.
+- Local sitemap returned exactly the six main public URLs and the RAG
+  detail URL under https://saadkabeer.online, without extra or duplicate URLs.
+- Before this documentation change, local main and GitHub main matched
+  259326536145b7dc419fc195623190cdfe73559e with a clean working tree.
+- This closeout changes documentation only. CMS content is stored separately
+  from Git and is not backed up by this commit.
+
+Limits and remaining roadmap:
+- These are local and published-CMS checks, not deployed production QA.
+- Schema-definition validation is not a comprehensive document-validation audit.
+- Certificate authenticity and link checks rely on the stated evidence and
+  user confirmations; no independent issuer audit is claimed.
+- Earlier accepted layouts and image systems were not reopened.
+- Historical validation limits remain unless explicitly superseded.
+- Recorded dependency findings still require review before launch.
+- Phase 14: Vercel deployment, environment setup and temporary-URL checks.
+  Do not change Hostinger DNS in Phase 14.
+- Phase 15: Hostinger custom-domain integration after Vercel is stable.
+- Phase 16: Final production QA, including CMS publishing, indexing,
+  security, accessibility, performance, domain, HTTPS and launch acceptance.
+- Version 1 is complete only after Phase 16.
 
 ## Current phase
 
@@ -856,8 +920,8 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 1 through 12 are complete. Phase 13 real-content work is in progress.
-Final content, deployed SEO/security verification, deployment and domain work remain.
+Phases 1 through 13 are complete. Phase 14 - Vercel Deployment is next and has not started.
+V1 content is accepted. Vercel deployment, Hostinger domain integration and final production QA remain in Phases 14, 15 and 16 respectively.
 Existing dependency findings remain documented above.
 
 Phase 6 completed and pushed:
