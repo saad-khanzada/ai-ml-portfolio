@@ -879,6 +879,36 @@ Limits and remaining roadmap:
   security, accessibility, performance, domain, HTTPS and launch acceptance.
 - Version 1 is complete only after Phase 16.
 
+## Phase 14 - Deployment dependency preparation
+
+Phase 14 is in progress. Vercel deployment has not yet been performed.
+
+Dependency change:
+- Added a targeted adm-zip 0.6.1 override.
+- Existing framework overrides and other locked packages were retained.
+- Sanity remains at 6.13.0; no forced downgrade or broad update was applied.
+- The updated audit reported seven moderate findings and no high or critical
+  findings. The remaining reported dependency chain concerns uuid/typeid-js.
+- The audit is not clean. Earlier UUID exposure limits remain applicable.
+- Removal of the adm-zip findings from audit output does not independently
+  prove the earlier destination-symlink issue is fixed.
+
+Validation:
+- Installed adm-zip copies resolved to 0.6.1.
+- Basic ZIP creation and reading passed.
+- Schema validation passed with zero errors and warnings.
+- Lint, TypeScript, production build and whitespace checks passed.
+- The user confirmed four local browser checks passed without errors:
+  Home, the RAG case study, Studio, and Profile / Site Settings editor.
+- No CMS content was changed.
+
+Next:
+- Import the validated GitHub repository into Vercel.
+- Configure deployment settings and required environment variables.
+- Verify the temporary Vercel URL and embedded Studio access.
+- Hostinger DNS remains unchanged until Phase 15.
+- Final production QA and V1 launch acceptance remain in Phase 16.
+
 ## Current phase
 
 Phase 2 completed and pushed:
@@ -920,7 +950,7 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 1 through 13 are complete. Phase 14 - Vercel Deployment is next and has not started.
+Phases 1 through 13 are complete. Phase 14 - Vercel Deployment is in progress.
 V1 content is accepted. Vercel deployment, Hostinger domain integration and final production QA remain in Phases 14, 15 and 16 respectively.
 Existing dependency findings remain documented above.
 
