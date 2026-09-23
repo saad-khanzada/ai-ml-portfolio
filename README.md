@@ -1,4 +1,4 @@
-﻿# AI/ML Portfolio
+# AI/ML Portfolio
 
 A professional AI/ML portfolio for internships, junior roles, freelancing,
 and collaboration. Content is managed in Sanity; presentation and frontend
@@ -1006,8 +1006,8 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 1 through 14 are complete. Phase 15 - Hostinger Domain Integration is next and has not started.
-V1 content and Vercel deployment are accepted. Hostinger domain integration and final production QA remain in Phases 15 and 16 respectively.
+Phases 1 through 15 are complete. Phase 16 - Final Production QA and Version 1 Launch is next and has not started.
+V1 content, Vercel deployment and custom-domain integration are accepted. Final production QA and explicit Version 1 launch acceptance remain in Phase 16.
 Existing dependency findings remain documented above.
 
 Phase 6 completed and pushed:
@@ -1036,3 +1036,49 @@ The website does not depend on continued access to Astra.
 Retain only verified changes:
 fix locally, validate, review the diff, commit the stable phase, then push.
 Never commit experimental dependency attempts or secrets.
+
+## Phase 15 - Hostinger domain integration acceptance and closeout
+
+Phase 15 domain integration is accepted following dashboard verification,
+public HTTP checks and the user's browser and Studio confirmation.
+This closes Phase 15; Version 1 is not yet declared launched.
+
+Configuration:
+- Primary production origin: https://saadkabeer.online.
+- Existing Hostinger apex A record changed from 2.57.91.91 to the
+  Vercel-provided value 216.198.79.1.
+- TTL set to 60 because Hostinger required a minimum of 60.
+- Existing www CNAME to saadkabeer.online was retained.
+- No nameserver changes or unrelated DNS-record changes were requested.
+- Existing n8n and email-related DNS records were preserved.
+- Vercel shows valid configuration for apex and www.
+- Apex serves Production; www redirects to apex with HTTP 308.
+- No application code, environment variables or CMS content were changed
+  as part of this domain-integration work.
+
+Verification:
+- The user confirmed the apex homepage loads without a privacy warning.
+- The user confirmed www redirects work for both the homepage and RAG
+  detail, preserving the project path without a privacy warning.
+- Direct HTTP checks found apex and www HTTP URLs redirect to their
+  respective HTTPS URLs with HTTP 308.
+- HTTPS homepage and RAG detail returned HTTP 200 with correct apex
+  canonical URLs.
+- Custom-domain sitemap returned HTTP 200 with exactly seven expected
+  V1 URLs, all under https://saadkabeer.online.
+- Robots returned HTTP 200, allowed crawling and referenced that sitemap.
+- The user confirmed https://saadkabeer.online/studio and Profile /
+  Site Settings load without CORS or access errors.
+- Before this documentation change, local main and origin/main matched
+  d9265068f1a95db47d9fb266a74a63dbd29b50e9 with a clean working tree.
+
+Limits and next phase:
+- Browser and authenticated Studio checks rely on user confirmation.
+- These checks do not claim worldwide DNS propagation or comprehensive
+  production QA.
+- This commit records acceptance; Git does not back up DNS, Vercel
+  settings, Sanity access configuration or CMS content.
+- Historical dependency findings and validation limits remain documented.
+- Phase 16 covers final production QA, including CMS publishing and
+  revalidation, accessibility, performance, security and launch acceptance.
+- Phase 16 has not started. Version 1 is complete only after its acceptance.
