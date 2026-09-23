@@ -4,6 +4,16 @@ A professional AI/ML portfolio for internships, junior roles, freelancing,
 and collaboration. Content is managed in Sanity; presentation and frontend
 behavior remain controlled in code.
 
+## Current handover
+
+Version 1 is live at https://saadkabeer.online. The original 16-phase roadmap
+is complete. Start with [START_HERE.md](START_HERE.md) for current project
+guidance and the architecture, design and operations reading order.
+
+This README retains the implementation history and acceptance evidence.
+Earlier phase statuses and implementation details can be superseded by later
+entries; consult the current guides and source before making changes.
+
 ## Stack
 
 - Next.js 16.3.4, App Router
@@ -11,7 +21,7 @@ behavior remain controlled in code.
 - Sanity 6.13.0 with next-sanity
 - Embedded Sanity Studio at /studio
 - npm and GitHub
-- Vercel hosting and Hostinger domain integration are planned later
+- Vercel hosting with the Hostinger-managed custom domain saadkabeer.online
 
 ## Local setup
 

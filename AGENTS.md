@@ -1,3 +1,10 @@
+# Project instructions
+
+Read [START_HERE.md](START_HERE.md) first and follow its task-specific reading
+order. Preserve unrelated behavior, inspect the relevant source, and update
+affected documentation with meaningful changes. Follow the owner's authorized
+scope for commits, publishing and production changes.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
