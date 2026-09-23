@@ -1006,8 +1006,8 @@ Historical Phase 5 validation limits:
 - Observed CMS refreshes do not establish an exact cache-timing guarantee.
 
 All six main pages are enabled in navigation.
-Phases 1 through 15 are complete. Phase 16 - Final Production QA and Version 1 Launch is next and has not started.
-V1 content, Vercel deployment and custom-domain integration are accepted. Final production QA and explicit Version 1 launch acceptance remain in Phase 16.
+Phases 1 through 16 are complete. Version 1 is accepted for launch.
+Version 1 is live at https://saadkabeer.online. The accepted scope, validation limits and maintenance items are recorded in the Phase 16 closeout below.
 Existing dependency findings remain documented above.
 
 Phase 6 completed and pushed:
@@ -1082,3 +1082,94 @@ Limits and next phase:
 - Phase 16 covers final production QA, including CMS publishing and
   revalidation, accessibility, performance, security and launch acceptance.
 - Phase 16 has not started. Version 1 is complete only after its acceptance.
+
+## Phase 16 - Final production QA and Version 1 launch acceptance
+
+The user explicitly accepted the current portfolio as Version 1 following
+the agreed production checks. Phase 16 closes the original 16-phase roadmap.
+Version 1 is live at https://saadkabeer.online.
+
+Accepted scope:
+- Existing Home, About, Projects, Experience, Blog and Contact pages.
+- One published RAG case study is sufficient for V1.
+- Profile, education, two experiences and three selected certifications
+  retain their previously accepted content.
+- Blog retains its accepted empty state; resume links remain hidden.
+- Accepted Featured/Listing cards, case-study presentation and shared
+  Project/Blog content-image behavior are preserved.
+- Additional project refinements, articles and a future resume remain
+  separate post-launch work. No filler content or new features were added.
+
+Production evidence:
+- Application and deployment baseline:
+  e517b5af57841500fb07f4ee95b8680d88388647.
+- Its automatic Vercel Production deployment reached Ready.
+- Prior accepted desktop/mobile navigation, image, professional-link,
+  custom-domain, HTTPS and path-preserving www redirect checks remain valid.
+- Custom-domain Studio and Profile / Site Settings loaded successfully.
+- The user published a temporary homepage sentence and observed it live,
+  then restored and republished the original introduction and confirmed
+  that the temporary sentence disappeared.
+- This establishes observed publishing/refresh behavior, not an exact
+  refresh-time guarantee.
+- The user confirmed keyboard navigation and 200% zoom checks passed.
+- Direct custom-domain HTTP checks returned 200 for About, Projects,
+  Experience, Blog and Contact, with correct canonical URLs.
+- Homepage/RAG canonical, sitemap and robots checks recorded in Phase 15
+  remain part of the acceptance evidence.
+- Missing general, project and blog routes returned 404 with noindex.
+- Studio HTML included noindex.
+- Checked public responses included nosniff and SAMEORIGIN protection;
+  no X-Powered-By header was observed.
+- Studio omitted the public frame restriction as previously intended.
+
+Performance evidence:
+- User-supplied PageSpeed Insights Mobile reports dated September 23, 2026:
+  - Homepage: Performance 99, Accessibility 100, Best Practices 100, SEO 100.
+    FCP 0.9s, LCP 2.0s, TBT 0ms, CLS 0, Speed Index 2.4s.
+  - RAG detail: Performance 99, Accessibility 100, Best Practices 100,
+    SEO 100. FCP 0.9s, LCP 2.0s, TBT 0ms, CLS 0, Speed Index 2.5s.
+- Small render-blocking, image-delivery and JavaScript optimization
+  suggestions were reviewed and deferred; the observed results did not
+  justify reopening accepted implementation before launch.
+
+Known dependency maintenance item:
+- The final supplied npm audit report retained seven moderate dependency
+  entries associated with UUID advisory GHSA-w5hq-g745-h8pq and its
+  dependency chain. No high or critical findings were reported.
+- This finding is unresolved and must not be described as fixed.
+- The advisory concerns v3/v5/v6 calls with supplied output buffers.
+  The earlier typeid-js review identified v7 usage; no new launch-blocking
+  exposure was established by the evidence reviewed.
+- This assessment is not a blanket guarantee of dependency safety.
+- Do not run npm audit fix --force to silence the report: the proposed
+  Sanity downgrade is a breaking change.
+- Reassess a compatible upstream fix during dependency maintenance and
+  validate affected build/Studio behavior before adopting it.
+- Earlier dependency findings and their documented limits remain retained.
+
+Validation limits:
+- Browser, authenticated Studio, keyboard/zoom and CMS publish/restore
+  results rely on the user's confirmations.
+- Lighthouse results are individual mobile lab runs for two pages, not
+  real-user Core Web Vitals evidence or an all-page performance guarantee.
+- Automated scores do not establish comprehensive accessibility or SEO
+  compliance, search indexing, rankings or assistive-technology coverage.
+- Targeted HTTP/header and dependency checks are not a penetration test,
+  exhaustive security review or guarantee that no vulnerabilities exist.
+- Previously recorded validation limits remain unless explicitly superseded.
+- Prior schema/lint/TypeScript/build validation and successful production
+  deployments remain the application-validation evidence. This final
+  documentation-only change does not claim a new application test run.
+- Git does not back up CMS content, DNS records or platform configuration.
+- Earlier phase statements that launch was pending are historical;
+  this explicit Phase 16 acceptance supersedes those status statements.
+
+Closeout:
+- This checkpoint changes README.md only.
+- No application code, schema, dependencies, CMS content, DNS or platform
+  settings are changed by this documentation checkpoint.
+- Push and the resulting automatic deployment are verified separately
+  after creating this local commit.
+- Future content additions and maintenance continue outside the completed
+  original 16-phase roadmap.
