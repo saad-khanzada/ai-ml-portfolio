@@ -5,7 +5,7 @@ Exact dependency versions are recorded in package.json and package-lock.json.
 
 ## Stack and boundaries
 
-Next.js 16.3.4 App Router, React 19.2.8, TypeScript, Tailwind CSS 4 and CSS
+Next.js 16.3.6 App Router, React 19.2.8, TypeScript, Tailwind CSS 4 and CSS
 Modules; Sanity 6.13.0 with next-sanity. npm is the package manager.
 Public pages use Server Components and server-only content helpers. Navbar is
 an interactive client component; Studio configuration is client-side.

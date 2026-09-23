@@ -4,6 +4,11 @@ Reviewed against V1 source commit `a305766c399fc25ea4999af5d8fe79a82f2be3f5`
 on 2026-09-23. The owner confirmed its Vercel Production deployment was Ready.
 This documentation is post-launch maintenance; the original 16 phases are closed.
 
+Current dependency maintenance updates Next.js and eslint-config-next to
+16.3.6. See [Operations](docs/OPERATIONS.md#nextjs-1636-maintenance)
+for the verification record. The source checkpoint above records the original
+handover review; exact current versions remain in the package files.
+
 ## Project and ownership
 
 Saad Kabeer's AI/ML portfolio supports internships, junior roles, freelance work

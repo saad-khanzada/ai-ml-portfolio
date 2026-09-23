@@ -16,7 +16,7 @@ entries; consult the current guides and source before making changes.
 
 ## Stack
 
-- Next.js 16.3.4, App Router
+- Next.js 16.3.6, App Router
 - React 19.2.8, TypeScript, Tailwind CSS
 - Sanity 6.13.0 with next-sanity
 - Embedded Sanity Studio at /studio

@@ -154,3 +154,20 @@ three categories; these are two lab runs, not real-user or all-page guarantees.
 Targeted headers/HTTP checks are not a penetration test; accessibility checks are
 not comprehensive assistive-technology coverage. No search ranking/indexing
 promise is made. Repeat checks for changed behavior, not to recreate every phase.
+
+## Next.js 16.3.6 maintenance
+
+Local verification recorded on 2026-09-23, before commit and deployment:
+
+- Baseline: 863d336278364de454d1f9362635679ebebb5855.
+- Updated next and eslint-config-next from 16.3.4 to exact version 16.3.6.
+- Lockfile review found only matching Next.js package updates.
+- React/React DOM, Sanity and existing overrides were unchanged.
+- npm run lint and npm run build passed, including build-time TypeScript checks.
+- The owner confirmed local production browser checks passed for the homepage,
+  RAG detail and embedded Studio.
+- No new npm audit result is claimed by this maintenance record.
+- The unresolved UUID finding and prior validation limits remain applicable.
+- Commit, push and Vercel Production verification were pending when this
+  local record was written; local success does not establish deployment.
+- No application source, design, CMS content, DNS or platform settings changed.
