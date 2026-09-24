@@ -13,8 +13,8 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Exclude Studio itself and all nested Studio routes.
-        source: '/:path((?!studio(?:/|$)).*)',
+        // Apply same-origin framing protection to all routes, including Studio.
+        source: '/:path*',
         headers: [
           {key: 'X-Frame-Options', value: 'SAMEORIGIN'},
         ],

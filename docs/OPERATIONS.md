@@ -82,9 +82,12 @@ its current dashboard origin list was not independently exported. When needed,
 use only the exact trusted origin (scheme + hostname + port), no /studio path
 or wildcard, and allow credentials for authenticated Studio access.
 
-Public responses set nosniff, strict-origin-when-cross-origin and SAMEORIGIN;
-Studio is excluded from SAMEORIGIN. X-Powered-By is disabled. Preview deployment
-responses receive noindex through VERCEL_ENV; Studio also has noindex metadata.
+All routes, including /studio and nested Studio routes, are configured to set
+nosniff, strict-origin-when-cross-origin and X-Frame-Options: SAMEORIGIN.
+Studio is used directly; cross-origin embedding in Sanity Dashboard is not
+required. Review this framing policy before introducing Dashboard embedding.
+X-Powered-By is disabled. Preview deployment responses receive noindex through
+VERCEL_ENV; Studio also has noindex metadata.
 Do not assume a publicly reachable Studio grants anonymous write permissions.
 
 ## Git workflow and delivery
@@ -171,3 +174,21 @@ Local verification recorded on 2026-09-23, before commit and deployment:
 - Commit, push and Vercel Production verification were pending when this
   local record was written; local success does not establish deployment.
 - No application source, design, CMS content, DNS or platform settings changed.
+
+## Studio framing protection maintenance
+
+Local verification recorded on 2026-09-24, before commit and deployment:
+
+- Baseline: 9070b4f6fe1a1cf1f409bc57f52e9afcc2f54f27.
+- Removed the Studio exclusion from the existing SAMEORIGIN header rule.
+- The owner confirmed direct Studio usage; Sanity Dashboard embedding is unused.
+- Lint and production build passed, including build-time TypeScript checks.
+- Local HTTP checks returned 200 and X-Frame-Options: SAMEORIGIN for /,
+  /studio and /studio/structure.
+- The owner confirmed Profile / Site Settings loaded in local Studio.
+  No CMS content was edited or published.
+- These checks verify response headers and direct editor access; they do not
+  establish an independently tested cross-origin iframe blocking result.
+- No dependencies, schemas, CORS settings, DNS or platform settings changed.
+- Commit, push and production verification were pending when this local
+  record was written. Earlier README framing exclusions are historical.
